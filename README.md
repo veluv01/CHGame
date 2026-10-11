@@ -1,5 +1,11 @@
 <a id="readme-top"></a>
 
+**Additional board support:** this fork includes the WeAct CH32X035F8U6
+variant and a repository-root PlatformIO project. Read the
+[PlatformIO guide](ports/weact-f8u6/README.md),
+[hardware connections](docs/weact-f8u6.md) and
+[verification results](docs/weact-f8u6-builds.md).
+
 <div align="center">
 
 <a href="https://chgame.website"><img src="docs/brand/banner.gif" width="100%" alt="CHGame, the lowest-cost game system: a handheld you program in Arduino, paging through the box art in its game menu"></a>
@@ -16,6 +22,7 @@
 [![Arduino](https://img.shields.io/badge/Arduino-IDE%20%26%20CLI-BDE2C7?style=for-the-badge&logo=arduino&logoColor=white&labelColor=252628)](#-get-started)
 [![RISC-V](https://img.shields.io/badge/RISC--V-CH32X035-C8B6F3?style=for-the-badge&logo=riscv&logoColor=white&labelColor=252628)](docs/platform.md)
 [![C++](https://img.shields.io/badge/language-C%2B%2B-B7DACC?style=for-the-badge&logo=cplusplus&logoColor=white&labelColor=252628)](https://bateske.github.io/CHGame/)
+[![PlatformIO](https://img.shields.io/badge/PlatformIO-WeAct%20F8U6-F9D84A?style=for-the-badge&logo=platformio&logoColor=white&labelColor=252628)](ports/weact-f8u6/README.md)
 
 <br>
 
@@ -44,8 +51,33 @@ games, and the PC tools (simulator, uploader, card builder).
 6. [Documentation](#-documentation)
 7. [Licences](#-licences)
 8. [Credits](#-credits)
+9. [PlatformIO and F8U6](#platformio-and-f8u6)
 
 </details>
+
+## PlatformIO and F8U6
+
+Open the repository root in PlatformIO to build the WeAct F8U6 variant
+against the shared CHGame core and libraries:
+
+```sh
+python -m pip install -r ports/weact-f8u6/requirements.txt
+pio run -e bringup
+pio run -e game
+```
+
+Normal application uploads require a WF86 bootloader. An unprovisioned
+board needs initial bootloader installation; see the [PlatformIO
+guide](ports/weact-f8u6/README.md). The F8U6 variant has its own pin map,
+omits external sound/status LED output and retains SDI debug pins.
+The upstream Rev0 setup below remains available.
+
+| Topic | Reference |
+|---|---|
+| Setup, environments, uploads and game development | [PlatformIO guide](ports/weact-f8u6/README.md) |
+| Pin map, USB-C links and power | [F8U6 hardware guide](docs/weact-f8u6.md) |
+| Upstream merges, CI and Arduino packaging | [Variant maintenance](docs/weact-f8u6-maintenance.md) |
+| Firmware budgets and validation | [Build results](docs/weact-f8u6-builds.md) |
 
 ## 🎮 What it is
 
@@ -519,6 +551,7 @@ CHGame/
 
 | For | Read |
 |---|---|
+| PlatformIO / WeAct F8U6 | [Build and upload](ports/weact-f8u6/README.md) · [hardware connections](docs/weact-f8u6.md) · [maintenance](docs/weact-f8u6-maintenance.md) · [build verification](docs/weact-f8u6-builds.md) |
 | Writing a game | [Getting started](docs/getting-started.md) (from the Arduboy) · [API reference](https://bateske.github.io/CHGame/) · [the CHGame library](platform/board/arduino/CHGame/libraries/CHGame/README.md) · [anatomy of a game](docs/game-anatomy.md) |
 | What things cost | [platform.md](docs/platform.md) (pins, memory map, speeds) · [performance.md](docs/performance.md) · [hardware revisions](docs/hardware-revisions.md) |
 | Playing | [the SD game menu](docs/sd-menu.md) · [the visual menu](docs/visual-menu.md) · [the SD card](docs/sd-card.md) |

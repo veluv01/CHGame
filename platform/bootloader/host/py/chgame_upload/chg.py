@@ -1,3 +1,4 @@
+# Modified 2026-10-11: WeAct F8U6 hardware variant; see docs/weact-f8u6.md.
 """CHG packages for the SD game menu: `chgame-upload pack`.
 
 A package is a 512-byte header plus the program image as `flash` would write
@@ -30,8 +31,9 @@ TITLE_LEN, AUTHOR_LEN, VERSTR_LEN = 32, 16, 8
 # revisions"). Never reused or reassigned.
 TARGET_REV0 = 0x35335843    # "CX35": CHGame Rev0 (CH32X035G8U6)
 TARGET_REV1 = 0x31524743    # "CGR1": reserved for CHGame Rev1, not yet defined
+TARGET_WEACT_F8U6 = 0x36384657  # "WF86": WeAct CH32X035F8U6
 TARGET_ID = TARGET_REV0     # what pack writes when no device is named
-DEVICES = {"rev0": TARGET_REV0}          # the boards this tool uploads and packs for
+DEVICES = {"rev0": TARGET_REV0, "weact-f8u6": TARGET_WEACT_F8U6}          # the boards this tool uploads and packs for
 RESERVED = {"rev1": TARGET_REV1}         # assigned, not defined yet: refused by name
 
 

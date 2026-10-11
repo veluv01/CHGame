@@ -431,3 +431,17 @@ repository's `bootloader/` flattened into this folder, plus `shared/`,
 folder is the bootloader's home, and the list of changes above is measured
 against that starting point. MIT licence ([LICENSE](LICENSE)); third-party notices in
 [THIRD-PARTY.md](THIRD-PARTY.md) and [NOTICE](NOTICE).
+
+## WeAct F8U6 variant in this checkout
+
+Use `--board=weact-f8u6` with `build.sh`, or the bootloader environments in
+`ports/weact-f8u6`, to select its pins and WF86 identity together. Five
+WeAct board-package images were built and pass the existing flash margin
+gates. The native suites pass, including the WeAct target check; no hardware
+was tested. See [the results](../../docs/weact-f8u6-builds.md).
+
+The build checks also exposed an upstream `card.c` title read past its NUL
+terminator. This checkout stops reading once the title ends. Existing native
+boot scenarios and pinned frames verify the fix. The native frame harness
+also recognizes that `v_real_*`, like `real_*`, needs the optional generated
+SD-card fixture; other missing/changed frames still fail.

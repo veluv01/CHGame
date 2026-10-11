@@ -1,3 +1,4 @@
+# Modified 2026-10-11: WeAct F8U6 hardware variant; see docs/weact-f8u6.md.
 """Build the CHGame Boards Manager package: the platform archive and the index.
 
     python tools/release/make_package.py --base-url URL [--version V] [--out out/dist]
@@ -92,6 +93,12 @@ def build_archive(version: str, out: Path = DIST) -> Path:
         fail("these sketches sit inside another example's folder, so File > Examples would show them nested in it:\n  "
              + "\n  ".join(nested) + "\nmove them, or exclude their folder (_common.PACKAGE_EXCLUDE_DIRS)")
     members = [(f"{root}/{p.relative_to(PLATFORM).as_posix()}", p) for p in files]
+    # Arduino's separately installed platform cannot import the checkout's
+    # uploader. Bundle the current shared host at release time so there is
+    # one source of truth, including future protocol and device updates.
+    host = REPO / "platform/bootloader/host/py/chgame_upload"
+    members += [(f"{root}/tools/weact_python/chgame_upload/{p.name}", p)
+                for p in sorted(host.glob("*.py"))]
     if version != platform_version():
         txt = PLATFORM.joinpath("platform.txt").read_bytes()
         txt = re.sub(rb"(?m)^version=.*$", b"version=" + version.encode(), txt, count=1)
@@ -137,7 +144,7 @@ def build_index(version: str, archive: Path, base_url: str, out: Path = DIST,
         "archiveFileName": archive.name,
         "checksum": "SHA-256:" + sha256(archive),
         "size": str(archive.stat().st_size),
-        "boards": [{"name": "CHGame Rev0"}],
+        "boards": [{"name": "CHGame Rev0"}, {"name": "CHGame WeAct F8U6"}],
         "toolsDependencies": [{"packager": "CHGame", "name": t["name"], "version": t["version"]}
                               for t in (gcc, wchisp, uploader)],
     }

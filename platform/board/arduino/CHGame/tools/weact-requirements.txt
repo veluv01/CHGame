@@ -1,0 +1,2 @@
+# Modified 2026-10-11: WeAct F8U6 hardware variant; see docs/weact-f8u6.md.
+pyserial>=3.5,<4

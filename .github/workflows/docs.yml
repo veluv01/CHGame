@@ -61,7 +61,7 @@ jobs:
           path: out/api-docs/html
 
   deploy:
-    if: github.event_name != 'pull_request'
+    if: github.repository == 'bateske/CHGame' && github.event_name != 'pull_request'
     needs: build
     runs-on: ubuntu-24.04
     permissions:

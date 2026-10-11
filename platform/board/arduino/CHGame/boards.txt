@@ -1,6 +1,7 @@
+# Modified 2026-10-11: WeAct F8U6 hardware variant; see docs/weact-f8u6.md.
 # CHGame board definition.
 #
-# Deliberately ONE board with ONE obvious upload behaviour. The upstream CH32
+# Each board keeps one normal upload behaviour. The upstream CH32
 # core exposes menus for clock, optimisation, debug level, C runtime and
 # programmer choice; almost none of that is meaningful to someone who just
 # wants to press Upload, and every extra menu is another way to end up with a
@@ -166,3 +167,76 @@ rev0.build.enable_usb=
 rev0.build.usb_speed=
 rev0.build.peripheral_pins=
 rev0.build.startup_file=
+
+# WeAct F8U6 target. Its dedicated bootloader binaries are built from the
+# shared bootloader sources with --board=weact-f8u6; see docs/weact-f8u6.md.
+weact-f8u6.name=CHGame WeAct F8U6
+weact-f8u6.build.core=arduino
+weact-f8u6.build.board=CHGAME_WEACT_F8U6
+weact-f8u6.build.mcu=QingKe-V4C
+weact-f8u6.build.series=CH32X035
+weact-f8u6.build.chip=CH32X035F8U
+weact-f8u6.build.variant=CH32X035/CHGame_WeActF8U6
+weact-f8u6.build.variant_h=variant_CHGame_WeActF8U6.h
+weact-f8u6.build.march=rv32imacxw
+weact-f8u6.build.mabi=ilp32
+weact-f8u6.build.math_lib_gcc=-lm
+weact-f8u6.build.ch_extra_lib=-lprintf
+weact-f8u6.build.ldscript=link_chgame_app.ld
+weact-f8u6.upload.maximum_size=50944
+weact-f8u6.upload.maximum_data_size=18416
+weact-f8u6.build.warn_data_percentage=95
+weact-f8u6.build.flags.clock=-DSYSCLK_FREQ_48MHz_HSI=48000000 -DF_CPU=48000000
+weact-f8u6.upload.tool=chgame_upload
+weact-f8u6.upload.protocol=chgame
+weact-f8u6.upload.use_1200bps_touch=false
+weact-f8u6.upload.wait_for_upload_port=false
+weact-f8u6.upload.native_usb=true
+weact-f8u6.bootloader.tool=chgame_upload
+weact-f8u6.vid.0=0x16C0
+weact-f8u6.pid.0=0x27DD
+weact-f8u6.menu.opt.oslto=Smallest + LTO (-Os -flto, default)
+weact-f8u6.menu.opt.oslto.build.flags.optimize=-Os -flto
+weact-f8u6.menu.opt.oslto.build.flags.ltolink=-flto-partition=one
+weact-f8u6.menu.opt.osstd=Smallest (-Os)
+weact-f8u6.menu.opt.osstd.build.flags.optimize=-Os
+weact-f8u6.menu.opt.o1std=Fast (-O1)
+weact-f8u6.menu.opt.o1std.build.flags.optimize=-O1
+weact-f8u6.menu.opt.o2std=Faster (-O2)
+weact-f8u6.menu.opt.o2std.build.flags.optimize=-O2
+weact-f8u6.menu.opt.o3std=Fastest (-O3)
+weact-f8u6.menu.opt.o3std.build.flags.optimize=-O3
+weact-f8u6.menu.opt.ogstd=Debug (-Og)
+weact-f8u6.menu.opt.ogstd.build.flags.optimize=-Og
+weact-f8u6.menu.rtlib.nano=Newlib Nano (default)
+weact-f8u6.menu.rtlib.nano.build.flags.ldflags=--specs=nano.specs --specs=nosys.specs
+weact-f8u6.menu.rtlib.nanofp=Newlib Nano + Float Printf
+weact-f8u6.menu.rtlib.nanofp.build.flags.ldflags=--specs=nano.specs --specs=nosys.specs -u _printf_float
+weact-f8u6.menu.rtlib.full=Newlib Standard
+weact-f8u6.menu.rtlib.full.build.flags.ldflags=--specs=nosys.specs
+weact-f8u6.menu.periph.game=Game: USB and SPI, no sound, LED, UART, I2C or PWM
+weact-f8u6.menu.periph.game.build.flags.periph=-DUART_MODULE_ONLY -DTIM_MODULE_ONLY
+weact-f8u6.menu.usb.serial=Serial (default)
+weact-f8u6.menu.usb.serial.build.usb_flags=-DUSE_CHGAME_USB_CDC
+weact-f8u6.menu.usb.uploadonly=Upload only: no Serial (~0.7 KB smaller)
+weact-f8u6.menu.usb.uploadonly.build.usb_flags=-DUSE_CHGAME_USB_BOOTONLY
+weact-f8u6.menu.boot.sdmenu=SD Text Menu (Rainbow)
+weact-f8u6.menu.boot.sdmenu.bootloader.file=CHGame/chgame_weact_sdboot.bin
+weact-f8u6.menu.boot.sdstatic=SD Text Menu (Static)
+weact-f8u6.menu.boot.sdstatic.bootloader.file=CHGame/chgame_weact_sdboot_static.bin
+weact-f8u6.menu.boot.sdvisual=SD Graphic Menu (Rainbow)
+weact-f8u6.menu.boot.sdvisual.bootloader.file=CHGame/chgame_weact_sdvisual.bin
+weact-f8u6.menu.boot.sdvisualstatic=SD Graphic Menu (Static)
+weact-f8u6.menu.boot.sdvisualstatic.bootloader.file=CHGame/chgame_weact_sdvisual_static.bin
+weact-f8u6.menu.boot.nomenu=USB Only
+weact-f8u6.menu.boot.nomenu.bootloader.file=CHGame/chgame_weact_boot_nomenu.bin
+weact-f8u6.build.flags.debug=-DNDEBUG
+weact-f8u6.build.flags.fp=
+weact-f8u6.build.enable_usb=
+weact-f8u6.build.usb_speed=
+weact-f8u6.build.peripheral_pins=
+weact-f8u6.build.startup_file=
+weact-f8u6.build.flags.board=-DCH32V_LOCK_DEBUG
+weact-f8u6.build.chgame_device=weact-f8u6
+weact-f8u6.build.chgame_host=python3 "{runtime.platform.path}/tools/weact_upload.py"
+weact-f8u6.build.chgame_host.windows=py -3 "{runtime.platform.path}/tools/weact_upload.py"

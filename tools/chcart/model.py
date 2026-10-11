@@ -1,3 +1,4 @@
+# Modified 2026-10-11: WeAct F8U6 hardware variant; see docs/weact-f8u6.md.
 """The .chgame format, version 1 (spec/chgame.md): the model, info.json in and
 out, and validation.
 
@@ -46,6 +47,8 @@ class Device:
 DEVICES = {
     "rev0": Device("rev0", "CHGame Rev0", "CH32X035G8U6", 0x3000, 50944, 50432,
                    0x35335843, 0x003000F7, "CHGame:ch32v:rev0"),
+    "weact-f8u6": Device("weact-f8u6", "CHGame WeAct F8U6", "CH32X035F8U6", 0x3000, 50944, 50432,
+                          0x36384657, 0x003000F7, "CHGame:ch32v:weact-f8u6"),
 }
 # Names and ids assigned to boards not defined yet: a binary for one is not
 # used (warning unknown-device, as for any board this reader does not know)

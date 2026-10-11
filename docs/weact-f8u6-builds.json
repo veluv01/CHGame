@@ -1,0 +1,1542 @@
+{
+  "upstream_base": "e1f8d05940ddb7bbef89c13326da75c003f02904",
+  "utc": "2026-10-11T06:37:07.071660+00:00",
+  "hardware_tested": false,
+  "host": "Linux x86_64, Python 3.12",
+  "platformio": "6.1.19",
+  "compiler": "WCH riscv-none-embed GCC 8.2.0",
+  "toolchain_git": "e8e7ba93c9c1ea30366d98f28318d4ad09b369e2",
+  "firmware_builds": [
+    {
+      "environment": "bringup",
+      "selection": null,
+      "passed": true,
+      "board": "weact-f8u6",
+      "target_id": 909657687,
+      "image_kind": "app",
+      "flash_bytes": 9152,
+      "hardware_tested": false,
+      "build_type": "release",
+      "name": "WeActBringup",
+      "flash_budget": 50944,
+      "save_pages": 0,
+      "options": {
+        "opt": "oslto",
+        "rtlib": "nano",
+        "periph": "game",
+        "usb": "serial"
+      },
+      "defines": [],
+      "app_origin": 12288,
+      "static_ram_bytes": 11620,
+      "ram_budget": 18416,
+      "ram_with_retained_and_stack": 13684,
+      "sha256": {
+        "firmware.bin": "daae863ec0d91312d7283962cb3ebab3161c2b1a85de1886a2ef27908a9dd292",
+        "firmware.elf": "e1aa1d433a5f128c0d1d5d34bdf32bdfc56c6f426a4c6cd50564208066362141",
+        "firmware.map": "62e698c1a7a723e272e057890a629997e7415cb6477bf837409a045b13840e00",
+        "firmware.chg": "75afb499c9353664082b76497c51cbc72bb140386135dcdf0b5a3d4b9556cedc"
+      }
+    },
+    {
+      "environment": "hello",
+      "selection": null,
+      "passed": true,
+      "board": "weact-f8u6",
+      "target_id": 909657687,
+      "image_kind": "app",
+      "flash_bytes": 9880,
+      "hardware_tested": false,
+      "build_type": "release",
+      "name": "Hello",
+      "flash_budget": 50944,
+      "save_pages": 0,
+      "options": {
+        "opt": "oslto",
+        "rtlib": "nano",
+        "periph": "game",
+        "usb": "uploadonly"
+      },
+      "defines": [],
+      "app_origin": 12288,
+      "static_ram_bytes": 11672,
+      "ram_budget": 18416,
+      "ram_with_retained_and_stack": 13736,
+      "sha256": {
+        "firmware.bin": "2d58123c49bb7ab33ea88867173e2cc0d3c8c984da5a1e02567bb417f4831e74",
+        "firmware.elf": "b4e840073b42b3507f149b6e6f70766602ea91ab49f07f0c11a4af21e4a84f87",
+        "firmware.map": "a2ba0f67d08514482ed00a013021f20dd30e3a113a9f482acf5d12bfe052605c",
+        "firmware.chg": "b817887406ed2be50783eff851f1aed4780b8947179f2719e0c41ff82629a7ca"
+      }
+    },
+    {
+      "environment": "game",
+      "selection": null,
+      "passed": true,
+      "board": "weact-f8u6",
+      "target_id": 909657687,
+      "image_kind": "app",
+      "flash_bytes": 35164,
+      "hardware_tested": false,
+      "build_type": "release",
+      "name": "CHFour",
+      "flash_budget": 50432,
+      "save_pages": 2,
+      "options": {
+        "opt": "oslto",
+        "rtlib": "nano",
+        "periph": "game",
+        "usb": "uploadonly"
+      },
+      "defines": [],
+      "app_origin": 12288,
+      "static_ram_bytes": 16260,
+      "ram_budget": 18416,
+      "ram_with_retained_and_stack": 18324,
+      "sha256": {
+        "firmware.bin": "6dad8c6b5794b0dd3b895269969f46ffef19b11b6411e8b62997887a2b13a8ef",
+        "firmware.elf": "9d5f27feb6671bf0ab9b73fc407378cf3bf12ed5b52e1209c72722cf27f52518",
+        "firmware.map": "b381475570abfc7d47181f0f9f280496da0cb7742f337e43571c7aa407a17fbe",
+        "firmware.chg": "6224e17d24b7648f8887ce661f4d77f3bebaea34f94abc47fecc84baf21e9358"
+      }
+    },
+    {
+      "environment": "game-debug",
+      "selection": null,
+      "passed": true,
+      "board": "weact-f8u6",
+      "target_id": 909657687,
+      "image_kind": "app",
+      "flash_bytes": 43632,
+      "hardware_tested": false,
+      "build_type": "debug",
+      "name": "CHFour",
+      "flash_budget": 50432,
+      "save_pages": 2,
+      "options": {
+        "opt": "oslto",
+        "rtlib": "nano",
+        "periph": "game",
+        "usb": "serial"
+      },
+      "defines": [],
+      "app_origin": 12288,
+      "static_ram_bytes": 17132,
+      "ram_budget": 18416,
+      "ram_with_retained_and_stack": 19196,
+      "sha256": {
+        "firmware.bin": "cacc6914ed2f069098dc38092db8d54c93d2ceaa59d5668c7efc3802a1f3636b",
+        "firmware.elf": "5237fd0428024b7ffec5de39be0e89d37d973312ffb15554d64bf90fc986037f",
+        "firmware.map": "3fd5d85e8e2120969835569b4951781977bb11a6a9104c3edece68840e20485b",
+        "firmware.chg": "ac469cca8d340b568c41eb1ce8e7017194f9d1e67f55c0db74c5e22a99c672b2"
+      }
+    },
+    {
+      "environment": "sdreader",
+      "selection": null,
+      "passed": true,
+      "board": "weact-f8u6",
+      "target_id": 909657687,
+      "image_kind": "app",
+      "flash_bytes": 42016,
+      "hardware_tested": false,
+      "build_type": "release",
+      "name": "CHSDtoUSB",
+      "flash_budget": 50432,
+      "save_pages": 2,
+      "options": {
+        "opt": "osstd",
+        "rtlib": "nano",
+        "periph": "game",
+        "usb": "serial"
+      },
+      "defines": [],
+      "app_origin": 12288,
+      "static_ram_bytes": 16868,
+      "ram_budget": 18416,
+      "ram_with_retained_and_stack": 18932,
+      "sha256": {
+        "firmware.bin": "3f05f8e97ffe0a1f34ff073fe7a83f941fa5b7b4a5db073228c58537023784c5",
+        "firmware.elf": "f38652109422b072f251d554cc4212117d8b75990dd0f6da125ed79edf0bdf61",
+        "firmware.map": "6343f29c7c7199e4b72637a4f32c674b9efa63fa1bea4b5a5363fcc4839190c4",
+        "firmware.chg": "faa13d23b6f3d6df8aa327d12434704eb775568629ba66f6d1807e4e56ba13e2"
+      }
+    },
+    {
+      "environment": "sdserial",
+      "selection": null,
+      "passed": true,
+      "board": "weact-f8u6",
+      "target_id": 909657687,
+      "image_kind": "app",
+      "flash_bytes": 44876,
+      "hardware_tested": false,
+      "build_type": "release",
+      "name": "CHSDtoSerial",
+      "flash_budget": 50432,
+      "save_pages": 2,
+      "options": {
+        "opt": "oslto",
+        "rtlib": "nano",
+        "periph": "game",
+        "usb": "serial"
+      },
+      "defines": [
+        "GFX_CHUNK_ROWS=1"
+      ],
+      "app_origin": 12288,
+      "static_ram_bytes": 17148,
+      "ram_budget": 18416,
+      "ram_with_retained_and_stack": 19212,
+      "sha256": {
+        "firmware.bin": "c28e0fc9fa3097261c1a521a762ff048370390e8cdfba1a37c1bd8ee0bacfbf4",
+        "firmware.elf": "015ffa7abaad879ff65d0bb10915c3dd60c04f5bfc8afdb5b0420f331820a1da",
+        "firmware.map": "5ec4ae9edf0dfe09ba3ec97eff0aa6e274288659e1643831cf58bcf26ab179de",
+        "firmware.chg": "3642d9a96cc996af497d890e63c01bef8bbf4c99a229e744118838c078b3e21b"
+      }
+    },
+    {
+      "environment": "stlviewer",
+      "selection": null,
+      "passed": true,
+      "board": "weact-f8u6",
+      "target_id": 909657687,
+      "image_kind": "app",
+      "flash_bytes": 30736,
+      "hardware_tested": false,
+      "build_type": "release",
+      "name": "CHStlView",
+      "flash_budget": 50432,
+      "save_pages": 2,
+      "options": {
+        "opt": "oslto",
+        "rtlib": "nano",
+        "periph": "game",
+        "usb": "uploadonly"
+      },
+      "defines": [],
+      "app_origin": 12288,
+      "static_ram_bytes": 16116,
+      "ram_budget": 18416,
+      "ram_with_retained_and_stack": 18180,
+      "sha256": {
+        "firmware.bin": "3f308beebf3088d64c4794b0d1ebc6d80d1c184ed30fdd8fe383bb9f3dd96dea",
+        "firmware.elf": "a9676ff7565880c16a3b9eef5971f630f19ff712f5d7059f148b6ebe42baf598",
+        "firmware.map": "e6fbf03ccd9bd8181fbc283b2ea9f7cae5d2e0f6ab35b85460e2d6fd237cf7d0",
+        "firmware.chg": "541eeecbc6312c1d3032024686d28cff5d0cb7f0454d3c05e7ffac4a8d0af723"
+      }
+    },
+    {
+      "environment": "bootloader",
+      "selection": null,
+      "passed": true,
+      "board": "weact-f8u6",
+      "target_id": 909657687,
+      "image_kind": "bootloader",
+      "flash_bytes": 11912,
+      "hardware_tested": false,
+      "build_type": "release",
+      "name": "bootloader",
+      "flash_budget": 12032,
+      "gate_margin": 256,
+      "app_origin": 0,
+      "static_ram_bytes": 18384,
+      "ram_budget": 18416,
+      "ram_with_retained_and_stack": 20448,
+      "sha256": {
+        "firmware.bin": "e804f838ead534115d258cc459740e65b8a4831c9041c120b0c6b2301e3dd82b",
+        "firmware.elf": "c07130691d9fc76856ffef292c826cce035fe8df200ea9031edcaf9e0f14433b",
+        "firmware.map": "66e1d94633854be07e854d025bb4a009f6491184781873bfe676a4c76bb6438c"
+      }
+    },
+    {
+      "environment": "bootloader-visual",
+      "selection": null,
+      "passed": true,
+      "board": "weact-f8u6",
+      "target_id": 909657687,
+      "image_kind": "bootloader",
+      "flash_bytes": 12076,
+      "hardware_tested": false,
+      "build_type": "release",
+      "name": "bootloader-visual",
+      "flash_budget": 12096,
+      "gate_margin": 192,
+      "app_origin": 0,
+      "static_ram_bytes": 18192,
+      "ram_budget": 18416,
+      "ram_with_retained_and_stack": 20256,
+      "sha256": {
+        "firmware.bin": "3471873c432ba31a64234c6ffa41bd8cf7a25b0da9aff94b177bec3efabd956c",
+        "firmware.elf": "f36752916bbd61f2d6c38797ca5e693ebcb11429446f951d55a9f085b0734a50",
+        "firmware.map": "aabd0d6f8331199f959276983fc0e2523de6e226a1d0a59ac44bfaa2e888e10d"
+      }
+    },
+    {
+      "environment": "bootloader-usb",
+      "selection": null,
+      "passed": true,
+      "board": "weact-f8u6",
+      "target_id": 909657687,
+      "image_kind": "bootloader",
+      "flash_bytes": 5272,
+      "hardware_tested": false,
+      "build_type": "release",
+      "name": "bootloader-usb",
+      "flash_budget": 12032,
+      "gate_margin": 256,
+      "app_origin": 0,
+      "static_ram_bytes": 1656,
+      "ram_budget": 18416,
+      "ram_with_retained_and_stack": 3720,
+      "sha256": {
+        "firmware.bin": "40a9f811eeb33c1edb80dd90117a4b54375b21fd910c17e23d5c8a9113406f93",
+        "firmware.elf": "8fcc5b939d33131a11e6d8a047ef7658f1fcb17a50b0462ca3a6e1cf3b74c85c",
+        "firmware.map": "176ee51d98ade69d25b9f9d59f958841923237b6a71df30146579233d692d5fd"
+      }
+    },
+    {
+      "environment": "bootloader-static",
+      "selection": null,
+      "passed": true,
+      "board": "weact-f8u6",
+      "target_id": 909657687,
+      "image_kind": "bootloader",
+      "flash_bytes": 11708,
+      "hardware_tested": false,
+      "build_type": "release",
+      "name": "bootloader-static",
+      "flash_budget": 12032,
+      "gate_margin": 256,
+      "app_origin": 0,
+      "static_ram_bytes": 18244,
+      "ram_budget": 18416,
+      "ram_with_retained_and_stack": 20308,
+      "sha256": {
+        "firmware.bin": "776f5d55335af1d2d85abd1260073d9f92fe569005492a3081820ae24b868358",
+        "firmware.elf": "a6b1a8ca2376a99d04852a26a64e8474243f13a5398951804527246568f6fe2b",
+        "firmware.map": "9e6889c984b02c0dc8d40ae45e5ec8f78f652771ef9ce33aedcf046278a51b19"
+      }
+    },
+    {
+      "environment": "bootloader-visual-static",
+      "selection": null,
+      "passed": true,
+      "board": "weact-f8u6",
+      "target_id": 909657687,
+      "image_kind": "bootloader",
+      "flash_bytes": 11884,
+      "hardware_tested": false,
+      "build_type": "release",
+      "name": "bootloader-visual-static",
+      "flash_budget": 12096,
+      "gate_margin": 192,
+      "app_origin": 0,
+      "static_ram_bytes": 18180,
+      "ram_budget": 18416,
+      "ram_with_retained_and_stack": 20244,
+      "sha256": {
+        "firmware.bin": "f80efe68c0dba31c5c9650430c1eb6e73100cd0ff06ca1a5af7c211cb0249bc1",
+        "firmware.elf": "eebeb9d838963ebb5749814296363e052ac88faac4a792d87ee91147da891c5b",
+        "firmware.map": "64a9f0a505c6d0da3cf7e6efd782ff030ab00e0c5b5071dba9f4e0a4c2e8b4e0"
+      }
+    },
+    {
+      "environment": "game",
+      "selection": "CHBackgammon",
+      "passed": true,
+      "board": "weact-f8u6",
+      "target_id": 909657687,
+      "image_kind": "app",
+      "flash_bytes": 47680,
+      "hardware_tested": false,
+      "build_type": "release",
+      "name": "CHBackgammon",
+      "flash_budget": 50432,
+      "save_pages": 2,
+      "options": {
+        "opt": "oslto",
+        "rtlib": "nano",
+        "periph": "game",
+        "usb": "uploadonly"
+      },
+      "defines": [],
+      "app_origin": 12288,
+      "static_ram_bytes": 16492,
+      "ram_budget": 18416,
+      "ram_with_retained_and_stack": 18556,
+      "sha256": {
+        "firmware.bin": "3250ef7239d0a76f1677923ee27a7d929675c6993cafc548e4bd7bfed3a53b03",
+        "firmware.elf": "21cac345659905be1c022850a8f5bcffb36e3da074618f96e6e166ab1c051912",
+        "firmware.map": "ad448bc05ded084a563093680878911771d2a5a877175f8fa7e3728ce09dacbc",
+        "firmware.chg": "cd659c51221da8097ea335693849a7e0c04593b0e481cc5cb85361eb14107c7e"
+      }
+    },
+    {
+      "environment": "game",
+      "selection": "CHBingo",
+      "passed": true,
+      "board": "weact-f8u6",
+      "target_id": 909657687,
+      "image_kind": "app",
+      "flash_bytes": 35460,
+      "hardware_tested": false,
+      "build_type": "release",
+      "name": "CHBingo",
+      "flash_budget": 50432,
+      "save_pages": 2,
+      "options": {
+        "opt": "oslto",
+        "rtlib": "nano",
+        "periph": "game",
+        "usb": "uploadonly"
+      },
+      "defines": [],
+      "app_origin": 12288,
+      "static_ram_bytes": 14768,
+      "ram_budget": 18416,
+      "ram_with_retained_and_stack": 16832,
+      "sha256": {
+        "firmware.bin": "b6aaa87401e6c6733cc493ebe3edd8c580b989ef6df70613b99fedbadea982f8",
+        "firmware.elf": "39dddd58fc7133fd834d8539ce6e4505eac1349bf34005f71a2a49170410f62a",
+        "firmware.map": "0ef4c45f4777cb3cc5210c63d41b104b5d7b19a8d7ab6f9e5539d7bc641bf856",
+        "firmware.chg": "db6aa5894a25e285ad2a627e42338c77d49ba00dc818d1f7d736fdbfc347bce9"
+      }
+    },
+    {
+      "environment": "game",
+      "selection": "CHBlackjack",
+      "passed": true,
+      "board": "weact-f8u6",
+      "target_id": 909657687,
+      "image_kind": "app",
+      "flash_bytes": 42960,
+      "hardware_tested": false,
+      "build_type": "release",
+      "name": "CHBlackjack",
+      "flash_budget": 50432,
+      "save_pages": 2,
+      "options": {
+        "opt": "oslto",
+        "rtlib": "nano",
+        "periph": "game",
+        "usb": "uploadonly"
+      },
+      "defines": [],
+      "app_origin": 12288,
+      "static_ram_bytes": 15412,
+      "ram_budget": 18416,
+      "ram_with_retained_and_stack": 17476,
+      "sha256": {
+        "firmware.bin": "78b00f2b814826d95c5617b2569f4062c401a205eb9825cfdeeed5efb5b867d0",
+        "firmware.elf": "1d81f9d1ecd3b92930c0dd46955c7cdcbcd47214e38d96b8c65683831f6af9be",
+        "firmware.map": "71f5d08199952d05cc0c1f2731fde6ebe31cfcd3812e935a2f650d2638cbe19d",
+        "firmware.chg": "8cb62ba98abe18720d794348fc595d3b6ad80eb55dd718c7776ffab70b623257"
+      }
+    },
+    {
+      "environment": "game",
+      "selection": "CHBoardwalk",
+      "passed": true,
+      "board": "weact-f8u6",
+      "target_id": 909657687,
+      "image_kind": "app",
+      "flash_bytes": 47948,
+      "hardware_tested": false,
+      "build_type": "release",
+      "name": "CHBoardwalk",
+      "flash_budget": 50432,
+      "save_pages": 2,
+      "options": {
+        "opt": "oslto",
+        "rtlib": "nano",
+        "periph": "game",
+        "usb": "uploadonly"
+      },
+      "defines": [],
+      "app_origin": 12288,
+      "static_ram_bytes": 14892,
+      "ram_budget": 18416,
+      "ram_with_retained_and_stack": 16956,
+      "sha256": {
+        "firmware.bin": "38bc187c409a48f7ceeff0cbf07232529b5d600c9e12ad06666ced587536c980",
+        "firmware.elf": "826ed02f8ee85d09469e9010dd0d9681c38fb88a2f561dc35a34e317fd227a41",
+        "firmware.map": "2d77705ed3998cfa9998fcd6eaa6a5fd7a470dee883e73f7912af93f618fe5e4",
+        "firmware.chg": "f18dbe6f4f69f02fbae5240d5d21ef02a09d02149f13cb5aa7e64eeafe7118ee"
+      }
+    },
+    {
+      "environment": "game",
+      "selection": "CHCheckers",
+      "passed": true,
+      "board": "weact-f8u6",
+      "target_id": 909657687,
+      "image_kind": "app",
+      "flash_bytes": 39528,
+      "hardware_tested": false,
+      "build_type": "release",
+      "name": "CHCheckers",
+      "flash_budget": 50432,
+      "save_pages": 2,
+      "options": {
+        "opt": "oslto",
+        "rtlib": "nano",
+        "periph": "game",
+        "usb": "uploadonly"
+      },
+      "defines": [],
+      "app_origin": 12288,
+      "static_ram_bytes": 16868,
+      "ram_budget": 18416,
+      "ram_with_retained_and_stack": 18932,
+      "sha256": {
+        "firmware.bin": "c4c7b7d378a5096b7f3ad3eaaf7474bd78213b97db56718bfa07100618f7b0bc",
+        "firmware.elf": "e683a419612569593e1df7d58fd58d0d38813c60b39ee30243048312b4cacf92",
+        "firmware.map": "16b764441961566d87f28372935462c47a77343891a5d633977d2d697ac95928",
+        "firmware.chg": "d9879855fa9fc1f4f03720999314c487671584907d48711de938dd826cbcdece"
+      }
+    },
+    {
+      "environment": "game",
+      "selection": "CHChess",
+      "passed": true,
+      "board": "weact-f8u6",
+      "target_id": 909657687,
+      "image_kind": "app",
+      "flash_bytes": 46712,
+      "hardware_tested": false,
+      "build_type": "release",
+      "name": "CHChess",
+      "flash_budget": 50432,
+      "save_pages": 2,
+      "options": {
+        "opt": "oslto",
+        "rtlib": "nano",
+        "periph": "game",
+        "usb": "uploadonly"
+      },
+      "defines": [],
+      "app_origin": 12288,
+      "static_ram_bytes": 17320,
+      "ram_budget": 18416,
+      "ram_with_retained_and_stack": 19384,
+      "sha256": {
+        "firmware.bin": "ecb416bcc1ac65375732634a831935f9e5cdb930e84dff545c785fa846202bf9",
+        "firmware.elf": "8443efeb02e5359e669266ca183fcc992258b3b6654434ba387b19b9cf528cb3",
+        "firmware.map": "09f3a3db556183c8b81c2334b77f919061e775fff81ab823a8aa2d6cc2606926",
+        "firmware.chg": "6f08043d610397235580924576aa8a80e0fbde44d87cde8664bf9368f146ca94"
+      }
+    },
+    {
+      "environment": "game",
+      "selection": "CHCraps",
+      "passed": true,
+      "board": "weact-f8u6",
+      "target_id": 909657687,
+      "image_kind": "app",
+      "flash_bytes": 48308,
+      "hardware_tested": false,
+      "build_type": "release",
+      "name": "CHCraps",
+      "flash_budget": 50432,
+      "save_pages": 2,
+      "options": {
+        "opt": "oslto",
+        "rtlib": "nano",
+        "periph": "game",
+        "usb": "uploadonly"
+      },
+      "defines": [],
+      "app_origin": 12288,
+      "static_ram_bytes": 15424,
+      "ram_budget": 18416,
+      "ram_with_retained_and_stack": 17488,
+      "sha256": {
+        "firmware.bin": "02728451f3b5101908e40d4bbb73ef140168d59f615329f580c9fee03a7b6bd7",
+        "firmware.elf": "50575bd01b53db8fff46efdab7f2131222b08149fdf0e947a1eb3ed824ef77b5",
+        "firmware.map": "b207b8e50b9fdaccde5077746caaebe10eb53652f0d7a094d48e33c4f270a1c7",
+        "firmware.chg": "78c3258ef63f3e31acb3829473a9e8592f69e1a270a7038fad7a67e7496f1549"
+      }
+    },
+    {
+      "environment": "game",
+      "selection": "CHCrossword",
+      "passed": true,
+      "board": "weact-f8u6",
+      "target_id": 909657687,
+      "image_kind": "app",
+      "flash_bytes": 48220,
+      "hardware_tested": false,
+      "build_type": "release",
+      "name": "CHCrossword",
+      "flash_budget": 50432,
+      "save_pages": 2,
+      "options": {
+        "opt": "oslto",
+        "rtlib": "nano",
+        "periph": "game",
+        "usb": "uploadonly"
+      },
+      "defines": [],
+      "app_origin": 12288,
+      "static_ram_bytes": 17076,
+      "ram_budget": 18416,
+      "ram_with_retained_and_stack": 19140,
+      "sha256": {
+        "firmware.bin": "a2cb5352990eb439bc163595d92314b7352569631bbe6d355eae34b9ae499f75",
+        "firmware.elf": "28e26bfdb142f1d0ce4d8fca61eacf3e467f789a0bd4f998c51deed101825832",
+        "firmware.map": "76dd5e005557565b5eb670dca3a6a28d08260f67ed95853788d858d5bf29eca9",
+        "firmware.chg": "89365708bb892e8dd4ba54dbd25fb6118a4df0516757a932aaf85da37b8a0e5b"
+      }
+    },
+    {
+      "environment": "game",
+      "selection": "CHDominoes",
+      "passed": true,
+      "board": "weact-f8u6",
+      "target_id": 909657687,
+      "image_kind": "app",
+      "flash_bytes": 41612,
+      "hardware_tested": false,
+      "build_type": "release",
+      "name": "CHDominoes",
+      "flash_budget": 50432,
+      "save_pages": 2,
+      "options": {
+        "opt": "oslto",
+        "rtlib": "nano",
+        "periph": "game",
+        "usb": "uploadonly"
+      },
+      "defines": [],
+      "app_origin": 12288,
+      "static_ram_bytes": 16712,
+      "ram_budget": 18416,
+      "ram_with_retained_and_stack": 18776,
+      "sha256": {
+        "firmware.bin": "1ef3247de4584281cf3b77761627c1c4deb8f5df1fb7e0cb79676e68d2cdf4bd",
+        "firmware.elf": "2d18e17f3fc293b78b1c0a84fb8d3ac52f4fff595c96c236c36acc2ce47c69d1",
+        "firmware.map": "ef321a783d2252e6e505f2e786ad94081862c16d35c05d5cd8be58f9b73b9b9b",
+        "firmware.chg": "f11bce950971852a425c0cf3f657e3ed4c4b0881c661785db2b9817559a8b190"
+      }
+    },
+    {
+      "environment": "game",
+      "selection": "CHMahjong",
+      "passed": true,
+      "board": "weact-f8u6",
+      "target_id": 909657687,
+      "image_kind": "app",
+      "flash_bytes": 46984,
+      "hardware_tested": false,
+      "build_type": "release",
+      "name": "CHMahjong",
+      "flash_budget": 50432,
+      "save_pages": 2,
+      "options": {
+        "opt": "oslto",
+        "rtlib": "nano",
+        "periph": "game",
+        "usb": "uploadonly"
+      },
+      "defines": [],
+      "app_origin": 12288,
+      "static_ram_bytes": 17668,
+      "ram_budget": 18416,
+      "ram_with_retained_and_stack": 19732,
+      "sha256": {
+        "firmware.bin": "81d4ca4dadf921e732e2f485f95607d0da595a0a693b1ba62f295486ff83ce9a",
+        "firmware.elf": "91d52be60d9a7c03505c26fb0b07a5b090e9db431a3ee66264f4882873cb6770",
+        "firmware.map": "b272257c9bf318f0b2b9a77342fb91ccbe966380484009ad2f13ff93019c6018",
+        "firmware.chg": "32354bf3a26af18c3ec210ccbb74b598e46a8e69d3d3fdb83741c794e35cdcf9"
+      }
+    },
+    {
+      "environment": "game",
+      "selection": "CHPoker",
+      "passed": true,
+      "board": "weact-f8u6",
+      "target_id": 909657687,
+      "image_kind": "app",
+      "flash_bytes": 47004,
+      "hardware_tested": false,
+      "build_type": "release",
+      "name": "CHPoker",
+      "flash_budget": 50432,
+      "save_pages": 2,
+      "options": {
+        "opt": "oslto",
+        "rtlib": "nano",
+        "periph": "game",
+        "usb": "uploadonly"
+      },
+      "defines": [],
+      "app_origin": 12288,
+      "static_ram_bytes": 15352,
+      "ram_budget": 18416,
+      "ram_with_retained_and_stack": 17416,
+      "sha256": {
+        "firmware.bin": "cbbe9c214572dcd867384ccb41c19e0189bc336537651ac0391f10d86854c0fe",
+        "firmware.elf": "afeebd076e91c986f85cf8f319f384e2041bea4a215c188b5dfac18ad6829805",
+        "firmware.map": "1c06227fbbc0d92b495cbafbc01c42d1d47a82f4e357346a7ad41f6c175cfa46",
+        "firmware.chg": "7ece96d107b72dd21170009320b774d8d9acc9f58037bc9ad301545f63d220ec"
+      }
+    },
+    {
+      "environment": "game",
+      "selection": "CHRoulette",
+      "passed": true,
+      "board": "weact-f8u6",
+      "target_id": 909657687,
+      "image_kind": "app",
+      "flash_bytes": 46980,
+      "hardware_tested": false,
+      "build_type": "release",
+      "name": "CHRoulette",
+      "flash_budget": 50432,
+      "save_pages": 2,
+      "options": {
+        "opt": "oslto",
+        "rtlib": "nano",
+        "periph": "game",
+        "usb": "uploadonly"
+      },
+      "defines": [],
+      "app_origin": 12288,
+      "static_ram_bytes": 15912,
+      "ram_budget": 18416,
+      "ram_with_retained_and_stack": 17976,
+      "sha256": {
+        "firmware.bin": "1fe1f23bae0e58ac2661b2a18104ff67992f1d589c25ffcbe1a9910d4f92a106",
+        "firmware.elf": "f1b48e34db4f2cb0a7eace85fefb92516cb8c5e60182e0713d4d268240c4be94",
+        "firmware.map": "162dd6c24e4f0245652f5e9296971a7c9d928d7d7cae02cc65ef8696d9891605",
+        "firmware.chg": "430f0534b746ecdb019cfcc7384701377518e32a3f0d92561bef0c0f5251efec"
+      }
+    },
+    {
+      "environment": "game",
+      "selection": "CHSlots",
+      "passed": true,
+      "board": "weact-f8u6",
+      "target_id": 909657687,
+      "image_kind": "app",
+      "flash_bytes": 45584,
+      "hardware_tested": false,
+      "build_type": "release",
+      "name": "CHSlots",
+      "flash_budget": 50432,
+      "save_pages": 2,
+      "options": {
+        "opt": "oslto",
+        "rtlib": "nano",
+        "periph": "game",
+        "usb": "uploadonly"
+      },
+      "defines": [],
+      "app_origin": 12288,
+      "static_ram_bytes": 14700,
+      "ram_budget": 18416,
+      "ram_with_retained_and_stack": 16764,
+      "sha256": {
+        "firmware.bin": "f99e6e43726784136f23795375d10791bad584b141ee859467962368cd724d06",
+        "firmware.elf": "72abbd0a72eb462e604295d3fc217d00886a501cd4bf6d0cf0550c93462e5e94",
+        "firmware.map": "567f4376f7a894b8dced2056e1ea4551232a6b41d028ae1dec76208bdf8663ad",
+        "firmware.chg": "6e5f2a219d81cfce7bce58ced450d574df71acd73a82857e7dab605fef589243"
+      }
+    },
+    {
+      "environment": "game",
+      "selection": "CHSnakes",
+      "passed": true,
+      "board": "weact-f8u6",
+      "target_id": 909657687,
+      "image_kind": "app",
+      "flash_bytes": 35352,
+      "hardware_tested": false,
+      "build_type": "release",
+      "name": "CHSnakes",
+      "flash_budget": 50432,
+      "save_pages": 2,
+      "options": {
+        "opt": "oslto",
+        "rtlib": "nano",
+        "periph": "game",
+        "usb": "uploadonly"
+      },
+      "defines": [],
+      "app_origin": 12288,
+      "static_ram_bytes": 15200,
+      "ram_budget": 18416,
+      "ram_with_retained_and_stack": 17264,
+      "sha256": {
+        "firmware.bin": "d380883229cb5f3c7fc2b4cf1c094c59a239539a4eb6330ae6af22ddd58a8ec5",
+        "firmware.elf": "7e3940ac4677aae56052962e0ff7df119c2b95f009b6e250b1ae136697677f93",
+        "firmware.map": "02bb4915ec484324148ceb8df7a771076c5d319a981214d405d7fd3c7e6f8ee9",
+        "firmware.chg": "28df441041bad8eaa5904efab1dcb41acfb690d3bb8e3f0692880d7caeb5f0e8"
+      }
+    },
+    {
+      "environment": "game",
+      "selection": "CHSolitaire",
+      "passed": true,
+      "board": "weact-f8u6",
+      "target_id": 909657687,
+      "image_kind": "app",
+      "flash_bytes": 29708,
+      "hardware_tested": false,
+      "build_type": "release",
+      "name": "CHSolitaire",
+      "flash_budget": 50432,
+      "save_pages": 2,
+      "options": {
+        "opt": "oslto",
+        "rtlib": "nano",
+        "periph": "game",
+        "usb": "uploadonly"
+      },
+      "defines": [],
+      "app_origin": 12288,
+      "static_ram_bytes": 16540,
+      "ram_budget": 18416,
+      "ram_with_retained_and_stack": 18604,
+      "sha256": {
+        "firmware.bin": "a6a5bb6656d587cc2874bd1b6f5e44862285f6535b85c84498b5f09948b625c9",
+        "firmware.elf": "a0f9402d890994d2abad569928334881bbdd0f67b8795d250d594b12b5a8ea0d",
+        "firmware.map": "69745bbe5acf643dcb404a0ee1cb2f73b656efc01844424423db038b17b5e2c8",
+        "firmware.chg": "6aa574324f5275fef2de2f8e11822ae6d83f212e689d9bdbea2dd02c880dfa42"
+      }
+    },
+    {
+      "environment": "game",
+      "selection": "CHTicTacToe",
+      "passed": true,
+      "board": "weact-f8u6",
+      "target_id": 909657687,
+      "image_kind": "app",
+      "flash_bytes": 48520,
+      "hardware_tested": false,
+      "build_type": "release",
+      "name": "CHTicTacToe",
+      "flash_budget": 50432,
+      "save_pages": 2,
+      "options": {
+        "opt": "oslto",
+        "rtlib": "nano",
+        "periph": "game",
+        "usb": "uploadonly"
+      },
+      "defines": [],
+      "app_origin": 12288,
+      "static_ram_bytes": 14508,
+      "ram_budget": 18416,
+      "ram_with_retained_and_stack": 16572,
+      "sha256": {
+        "firmware.bin": "e492a806b708d4519f6fcca2025a208380ee96c07b8b627d041b5c1aef3f9e07",
+        "firmware.elf": "82cfc9b01b608278c97dfec6004af9800f77c0764b015f231d38b199cc668b5d",
+        "firmware.map": "b300ddb2c7c785b7ce83c12bb6c5eb2f4477d2d591bfb3220b1a6f94226fb5dc",
+        "firmware.chg": "6c2bd1b10d970c8e7046f767a27de921983ef8f5a576857cb908b761ecc6d7f9"
+      }
+    },
+    {
+      "environment": "game",
+      "selection": "CHWordWheel",
+      "passed": true,
+      "board": "weact-f8u6",
+      "target_id": 909657687,
+      "image_kind": "app",
+      "flash_bytes": 47292,
+      "hardware_tested": false,
+      "build_type": "release",
+      "name": "CHWordWheel",
+      "flash_budget": 50432,
+      "save_pages": 2,
+      "options": {
+        "opt": "oslto",
+        "rtlib": "nano",
+        "periph": "game",
+        "usb": "uploadonly"
+      },
+      "defines": [],
+      "app_origin": 12288,
+      "static_ram_bytes": 14848,
+      "ram_budget": 18416,
+      "ram_with_retained_and_stack": 16912,
+      "sha256": {
+        "firmware.bin": "ff38e6944ae499528a7a171c6b1c86290944fee63a20860509e715b4faef63c2",
+        "firmware.elf": "62d388240430bc1eda5388ff6a6f79828da4dbe31d4ce4869c6dbb2dc21d14fd",
+        "firmware.map": "da1697202ab81b031707027a44e96d05aad80a732e3cdeb67efe3ccbe3a6fa47",
+        "firmware.chg": "6f16b415035df8b5603f8f226a41ad703cbe4567b8dd779b04e358061faa0b92"
+      }
+    },
+    {
+      "environment": "game",
+      "selection": "CHWords",
+      "passed": true,
+      "board": "weact-f8u6",
+      "target_id": 909657687,
+      "image_kind": "app",
+      "flash_bytes": 48340,
+      "hardware_tested": false,
+      "build_type": "release",
+      "name": "CHWords",
+      "flash_budget": 50432,
+      "save_pages": 2,
+      "options": {
+        "opt": "oslto",
+        "rtlib": "nano",
+        "periph": "game",
+        "usb": "uploadonly"
+      },
+      "defines": [],
+      "app_origin": 12288,
+      "static_ram_bytes": 15588,
+      "ram_budget": 18416,
+      "ram_with_retained_and_stack": 17652,
+      "sha256": {
+        "firmware.bin": "0fcc16ff63c1de95190dad96a38a2f79f0a7ea53abf617193899e3c3a815fb60",
+        "firmware.elf": "994048b6a157479eedca236c622335a2091a48e620beec1bb5b9e970e751b819",
+        "firmware.map": "84bdfc4b2d937033c8943b4b673d72e00b7498b04ad7c87ac97fc764b6b39250",
+        "firmware.chg": "d8a164a089cf322a2f106e8bd41404653716b888dc3c50ab3dc3685c9aaa7f24"
+      }
+    },
+    {
+      "environment": "game",
+      "selection": "CHYacht",
+      "passed": true,
+      "board": "weact-f8u6",
+      "target_id": 909657687,
+      "image_kind": "app",
+      "flash_bytes": 42688,
+      "hardware_tested": false,
+      "build_type": "release",
+      "name": "CHYacht",
+      "flash_budget": 50432,
+      "save_pages": 2,
+      "options": {
+        "opt": "oslto",
+        "rtlib": "nano",
+        "periph": "game",
+        "usb": "uploadonly"
+      },
+      "defines": [],
+      "app_origin": 12288,
+      "static_ram_bytes": 15076,
+      "ram_budget": 18416,
+      "ram_with_retained_and_stack": 17140,
+      "sha256": {
+        "firmware.bin": "4bd22787865e49593b8cc9fae879f5518cda8beb67394a3fed3380dff25f84a6",
+        "firmware.elf": "53dc407da4cefc64e2ce795d3ed95922170de3ceb62fa382bfd2b3d3dfed460b",
+        "firmware.map": "d8db5adae3c2dc05a9839101ba49b686fe7c47bb6c39c1ab59336e3d34359da3",
+        "firmware.chg": "493f68b6d4cb308c4b3d6a509816073a0eede674106b02d96a25d7459c56ce80"
+      }
+    }
+  ],
+  "standalone_entry_point": {
+    "environments": [
+      "bringup",
+      "game",
+      "bootloader"
+    ],
+    "matches_root_images": true
+  },
+  "package_checks": {
+    "applications": 26,
+    "bootloaders": 5,
+    "target_id": "WF86 / 0x36384657",
+    "wrong_rev0_target_rejected": true,
+    "sd_card_programs": 23,
+    "sd_card_files": 50
+  },
+  "tests": {
+    "profile": {
+      "passed": 6
+    },
+    "python_uploader": {
+      "passed": 22
+    },
+    "cart": {
+      "passed": 33,
+      "skipped": 1,
+      "skip_reason": "optional jsonschema dependency not installed"
+    },
+    "bootloader_native": {
+      "passed": 1304,
+      "pinned_frames": 78,
+      "optional_real_card_fixture": "not generated; skipped"
+    },
+    "arduino_archive": {
+      "current_shared_host_bundled": true,
+      "five_weact_bootloaders_bundled": true,
+      "installed_wrapper_loads": true
+    }
+  },
+  "rev0_regression": {
+    "games": 20,
+    "byte_identical_to_upstream": true,
+    "method": "temporary Rev0 application profile derived from the PlatformIO adapter; current vs upstream sources; no Arduino CLI or hardware",
+    "images": {
+      "CHBackgammon": {
+        "bytes": 49488,
+        "sha256": "a1ab6eb17204938a65fc7a4d70085ba2f304098538f65e041d2b331cd6c7a4ba"
+      },
+      "CHBingo": {
+        "bytes": 36948,
+        "sha256": "b8edcbaabdd5bc8cf5cf5ae8abb679101f93e6d345bf9b579ce8469449112dbb"
+      },
+      "CHBlackjack": {
+        "bytes": 46372,
+        "sha256": "41ab697b216c9c4d4e8e69e35ef3e5534092fe4136156a29184c1a1e9b2064fe"
+      },
+      "CHBoardwalk": {
+        "bytes": 49844,
+        "sha256": "53ee394c15b8aa8f737088963b0cfa2cf6a48bbcbbf108a53e32b1b5e5c641a6"
+      },
+      "CHCheckers": {
+        "bytes": 41860,
+        "sha256": "14132ea1d093280d3fd3d951e90d7aa4823f6b26c044072dfcbc80f43188740b"
+      },
+      "CHChess": {
+        "bytes": 48460,
+        "sha256": "4926e138dd6519524aa0a9a960ddf7b3e482ba95a1b862b714cf3dcc9526f4a6"
+      },
+      "CHCraps": {
+        "bytes": 50368,
+        "sha256": "902072fbb3098b735b81dd2f11c94337cfb9726503b821a3438eb35aca79b308"
+      },
+      "CHCrossword": {
+        "bytes": 50060,
+        "sha256": "03c3177b8c98a92a03724072a31a00890447ec44136ea567e0ab278003eb9e83"
+      },
+      "CHDominoes": {
+        "bytes": 43408,
+        "sha256": "32e90162bf47bdab9096cb6f7c0f92e351a2a93df7a0f46ca93564d89b742a67"
+      },
+      "CHFour": {
+        "bytes": 36728,
+        "sha256": "d9701225bb3ba23fcaf0555062219610aac3ae3206449e72a438e4b500b4ddea"
+      },
+      "CHMahjong": {
+        "bytes": 48768,
+        "sha256": "9199363ec3df395b87682eae8bf582f8aa807696b6779c636824ae4c85f72248"
+      },
+      "CHPoker": {
+        "bytes": 48956,
+        "sha256": "7e6ac206a775e223f5a07036a0e25e2a7f3450df40d4905f03d837bf536730a2"
+      },
+      "CHRoulette": {
+        "bytes": 49892,
+        "sha256": "9551842c583cf58386079418978fd32d6a82c34e05281f6934a610094c15a26a"
+      },
+      "CHSlots": {
+        "bytes": 48076,
+        "sha256": "fe5cee917461e0555b47d12ba9c177fad648a92309547286e91038e673511750"
+      },
+      "CHSnakes": {
+        "bytes": 37288,
+        "sha256": "8b537c725614a21e2a6dfc6f4e03a8ba8ac8d8924a3bb83a8c61d5cced9ad497"
+      },
+      "CHSolitaire": {
+        "bytes": 31308,
+        "sha256": "4eaca33be97bce862a146bc9b797da597972ba7e5528224939b42a5648bf805f"
+      },
+      "CHTicTacToe": {
+        "bytes": 50236,
+        "sha256": "e3f953788d138a110bc6503e867774c21ef358c6cfd80b0088f62382094dd89d"
+      },
+      "CHWordWheel": {
+        "bytes": 50156,
+        "sha256": "2bc8e66c23b29c47bc8fad54e41e7e69c4b8132200accc88feb86b9952733416"
+      },
+      "CHWords": {
+        "bytes": 50092,
+        "sha256": "3872651e0066ce5fff0deb5547e7e306358bb5cab5e1cd260109ae8be43b3801"
+      },
+      "CHYacht": {
+        "bytes": 44660,
+        "sha256": "7b1e5eaf231116254a8490ab90e7a5bad32724f4acf35aa4af978d72807de6f7"
+      }
+    }
+  },
+  "simulator": {
+    "games": 20,
+    "frames_per_run": 24,
+    "sample_every": 4,
+    "matched_frame_pairs": 120,
+    "input_events": "A and START",
+    "compiler_flags": "CHSIM_CXX=g++, CHSIM_FLAGS=-include chrono",
+    "results": [
+      {
+        "game": "CHBackgammon",
+        "passed": true,
+        "compared_frames": 6,
+        "frames": {
+          "upstream": {
+            "frame00000.png": "1f20d7449334b4ccf9b4a587ef6e3ffdcba11d626948bd0c0ad3c6995ca44e7c",
+            "frame00004.png": "ed08a7fadad0eec47652b5a11b123b7fa73b54bbcb7d7eb0f45086e173c5361b",
+            "frame00008.png": "5fd244e301a3efbad74f0a241763db734423f5915e5d75a2f574f4327d47844e",
+            "frame00012.png": "fcc421be8a04827a870e731975129d12d87d465940ccda28f257dc26dba2583c",
+            "frame00016.png": "b443cb65464b9ffc909d6204bd4af7266effbd1c9f1e6c02ab9108d4c5f50e2f",
+            "frame00020.png": "3b9665601c98c4d353cc963b4fa2cf0c169d12a74413ec551eb89c67c3c6e645"
+          },
+          "weact": {
+            "frame00000.png": "1f20d7449334b4ccf9b4a587ef6e3ffdcba11d626948bd0c0ad3c6995ca44e7c",
+            "frame00004.png": "ed08a7fadad0eec47652b5a11b123b7fa73b54bbcb7d7eb0f45086e173c5361b",
+            "frame00008.png": "5fd244e301a3efbad74f0a241763db734423f5915e5d75a2f574f4327d47844e",
+            "frame00012.png": "fcc421be8a04827a870e731975129d12d87d465940ccda28f257dc26dba2583c",
+            "frame00016.png": "b443cb65464b9ffc909d6204bd4af7266effbd1c9f1e6c02ab9108d4c5f50e2f",
+            "frame00020.png": "3b9665601c98c4d353cc963b4fa2cf0c169d12a74413ec551eb89c67c3c6e645"
+          }
+        }
+      },
+      {
+        "game": "CHBingo",
+        "passed": true,
+        "compared_frames": 6,
+        "frames": {
+          "upstream": {
+            "frame00000.png": "04df7f4ec430b4786bc43ba1fa29270ab5d951ab4dc9d06aa2374387c12926f9",
+            "frame00004.png": "345ceedb0c7599b2220fea4903d155db6ce1fd8819dbb9c3005038835230e2aa",
+            "frame00008.png": "f590d9ac5e2b0edb01885ad2a5c7a1e0db2d1cb2221031c5b181717030acccde",
+            "frame00012.png": "b30cbbe41c6e1a0189273d3f1b331ef003e3c413c931e3b6356f5e6a4082a6ee",
+            "frame00016.png": "ab5ff476b16e9f3525acd1ac83b9e73fc303e886e923c91eea0536e454983d27",
+            "frame00020.png": "4b114e05fa4947fb130ce626207aa12c03235b739a30f5281509724adb2244b0"
+          },
+          "weact": {
+            "frame00000.png": "04df7f4ec430b4786bc43ba1fa29270ab5d951ab4dc9d06aa2374387c12926f9",
+            "frame00004.png": "345ceedb0c7599b2220fea4903d155db6ce1fd8819dbb9c3005038835230e2aa",
+            "frame00008.png": "f590d9ac5e2b0edb01885ad2a5c7a1e0db2d1cb2221031c5b181717030acccde",
+            "frame00012.png": "b30cbbe41c6e1a0189273d3f1b331ef003e3c413c931e3b6356f5e6a4082a6ee",
+            "frame00016.png": "ab5ff476b16e9f3525acd1ac83b9e73fc303e886e923c91eea0536e454983d27",
+            "frame00020.png": "4b114e05fa4947fb130ce626207aa12c03235b739a30f5281509724adb2244b0"
+          }
+        }
+      },
+      {
+        "game": "CHBlackjack",
+        "passed": true,
+        "compared_frames": 6,
+        "frames": {
+          "upstream": {
+            "frame00000.png": "c9559f873bb87c8a471b1bab5cbfbd99161b52884b8fe05318d2fe2199adf317",
+            "frame00004.png": "68b355c4b25dc39c0eb93721db23e3ee15cf17318f6564950fb60b27ed1c773c",
+            "frame00008.png": "d531fec7eaee1b423891d328ec2ecc86a3d03674e90151481b332b4ffbd1c128",
+            "frame00012.png": "150910a62904a01a3287fb2b22a5919f0284a8acd4b3937fe0c5823964cf9871",
+            "frame00016.png": "17c4ac55f471f0dbeea2f2a882e74fe0cee5daccca9eb1f1a3024532c06e8641",
+            "frame00020.png": "750c123589937970c887dcac9707865473a6c56c8a6f6792ed879b679d67a0ec"
+          },
+          "weact": {
+            "frame00000.png": "c9559f873bb87c8a471b1bab5cbfbd99161b52884b8fe05318d2fe2199adf317",
+            "frame00004.png": "68b355c4b25dc39c0eb93721db23e3ee15cf17318f6564950fb60b27ed1c773c",
+            "frame00008.png": "d531fec7eaee1b423891d328ec2ecc86a3d03674e90151481b332b4ffbd1c128",
+            "frame00012.png": "150910a62904a01a3287fb2b22a5919f0284a8acd4b3937fe0c5823964cf9871",
+            "frame00016.png": "17c4ac55f471f0dbeea2f2a882e74fe0cee5daccca9eb1f1a3024532c06e8641",
+            "frame00020.png": "750c123589937970c887dcac9707865473a6c56c8a6f6792ed879b679d67a0ec"
+          }
+        }
+      },
+      {
+        "game": "CHBoardwalk",
+        "passed": true,
+        "compared_frames": 6,
+        "frames": {
+          "upstream": {
+            "frame00000.png": "09a67cf6dc5af2051839f4beb3cefcdb51a2644fbbe7e6bda48d7bfd3be7c8a2",
+            "frame00004.png": "5f83a403aab3697e3f661c1bebb41667fed6cd2f2bac9844e732f9d272f1b4fc",
+            "frame00008.png": "1eeb9b24047a076f40474e69609e92de8b9832c5647d73c9db97fe4704d633cc",
+            "frame00012.png": "d122d4c5ec4f8f8ee5c858b10678b7334010ab153a9c81cc6162796709fd2b1f",
+            "frame00016.png": "9aa77fcb1b5942f94f91e75644fe21913d4f9ff06fb30e853d640afe8cd4114d",
+            "frame00020.png": "55e78107dd7980248fac179c517eb1c0054964830b21416e092046130f28c10f"
+          },
+          "weact": {
+            "frame00000.png": "09a67cf6dc5af2051839f4beb3cefcdb51a2644fbbe7e6bda48d7bfd3be7c8a2",
+            "frame00004.png": "5f83a403aab3697e3f661c1bebb41667fed6cd2f2bac9844e732f9d272f1b4fc",
+            "frame00008.png": "1eeb9b24047a076f40474e69609e92de8b9832c5647d73c9db97fe4704d633cc",
+            "frame00012.png": "d122d4c5ec4f8f8ee5c858b10678b7334010ab153a9c81cc6162796709fd2b1f",
+            "frame00016.png": "9aa77fcb1b5942f94f91e75644fe21913d4f9ff06fb30e853d640afe8cd4114d",
+            "frame00020.png": "55e78107dd7980248fac179c517eb1c0054964830b21416e092046130f28c10f"
+          }
+        }
+      },
+      {
+        "game": "CHCheckers",
+        "passed": true,
+        "compared_frames": 6,
+        "frames": {
+          "upstream": {
+            "frame00000.png": "99fe987743524d10cb2c1a6be9947a69023cf8706cf3b6b7f3370234582b8620",
+            "frame00004.png": "ef95600cf4ff702a0805f724f72b99c7bf88ef5031c695fdfc714c7facafd50a",
+            "frame00008.png": "99fe987743524d10cb2c1a6be9947a69023cf8706cf3b6b7f3370234582b8620",
+            "frame00012.png": "00033e71c704eec087073e9db5e501163aca2675a38d1473b4aa4e8287fa1f92",
+            "frame00016.png": "666d119dfebc415b857de7e7b38f87550c21520320352ea3883a7ed3a7cfd25f",
+            "frame00020.png": "93b4062c1f29a1df6e32c0dac8a95adaff29faacfdedb139d8a9894df26006c4"
+          },
+          "weact": {
+            "frame00000.png": "99fe987743524d10cb2c1a6be9947a69023cf8706cf3b6b7f3370234582b8620",
+            "frame00004.png": "ef95600cf4ff702a0805f724f72b99c7bf88ef5031c695fdfc714c7facafd50a",
+            "frame00008.png": "99fe987743524d10cb2c1a6be9947a69023cf8706cf3b6b7f3370234582b8620",
+            "frame00012.png": "00033e71c704eec087073e9db5e501163aca2675a38d1473b4aa4e8287fa1f92",
+            "frame00016.png": "666d119dfebc415b857de7e7b38f87550c21520320352ea3883a7ed3a7cfd25f",
+            "frame00020.png": "93b4062c1f29a1df6e32c0dac8a95adaff29faacfdedb139d8a9894df26006c4"
+          }
+        }
+      },
+      {
+        "game": "CHChess",
+        "passed": true,
+        "compared_frames": 6,
+        "frames": {
+          "upstream": {
+            "frame00000.png": "d16984ce3892bf3c0e3aaa902b07f535350a08d9b40358325bb5641acd1f4cf6",
+            "frame00004.png": "4623945f44692e46cb28403d1b1ea910365cb1c85e8480e04ade102a1a666bd0",
+            "frame00008.png": "18f9800c18c3a01d90698319f9532cb7d0c1b1c3137695bf3a9c69158f2ad253",
+            "frame00012.png": "58dced3ad9052ea8b90c8cded58582916d5433e900e58ee9ffde4c3c319a162b",
+            "frame00016.png": "be88f476f6b1f6f0f7cc6e7d35bf729df684a72245cd4a52e64ea0c99f75b423",
+            "frame00020.png": "5e612d02086a39e3d88eb39a29b35148c4d62ad544b9216076a1203a6be3be6a"
+          },
+          "weact": {
+            "frame00000.png": "d16984ce3892bf3c0e3aaa902b07f535350a08d9b40358325bb5641acd1f4cf6",
+            "frame00004.png": "4623945f44692e46cb28403d1b1ea910365cb1c85e8480e04ade102a1a666bd0",
+            "frame00008.png": "18f9800c18c3a01d90698319f9532cb7d0c1b1c3137695bf3a9c69158f2ad253",
+            "frame00012.png": "58dced3ad9052ea8b90c8cded58582916d5433e900e58ee9ffde4c3c319a162b",
+            "frame00016.png": "be88f476f6b1f6f0f7cc6e7d35bf729df684a72245cd4a52e64ea0c99f75b423",
+            "frame00020.png": "5e612d02086a39e3d88eb39a29b35148c4d62ad544b9216076a1203a6be3be6a"
+          }
+        }
+      },
+      {
+        "game": "CHCraps",
+        "passed": true,
+        "compared_frames": 6,
+        "frames": {
+          "upstream": {
+            "frame00000.png": "db7c0cfe71950e511123bc8fc32c5ec0cec363818c0a5abc6a5fffaaf6cb15aa",
+            "frame00004.png": "4f86a0926c5477d375f9466cf8d56c785e93d3a0cf6bfb6cf0fcd219444fa7a0",
+            "frame00008.png": "59c451d084c56be36ecb5ad51a961be2aa69006390c2de062bdf899777bc68e7",
+            "frame00012.png": "b71c4a0d40f75daf052721993fd7de50ad5d658176d6cd367ba760d53808dde9",
+            "frame00016.png": "9e0efad9232d80c0b26b153b68530a0a7fcdf4fd383e4568c41a339aaf9ac476",
+            "frame00020.png": "64322a54ff942958e9959e7f2a7cdb5b980485245cd99d38bf4d119ad5f89d6f"
+          },
+          "weact": {
+            "frame00000.png": "db7c0cfe71950e511123bc8fc32c5ec0cec363818c0a5abc6a5fffaaf6cb15aa",
+            "frame00004.png": "4f86a0926c5477d375f9466cf8d56c785e93d3a0cf6bfb6cf0fcd219444fa7a0",
+            "frame00008.png": "59c451d084c56be36ecb5ad51a961be2aa69006390c2de062bdf899777bc68e7",
+            "frame00012.png": "b71c4a0d40f75daf052721993fd7de50ad5d658176d6cd367ba760d53808dde9",
+            "frame00016.png": "9e0efad9232d80c0b26b153b68530a0a7fcdf4fd383e4568c41a339aaf9ac476",
+            "frame00020.png": "64322a54ff942958e9959e7f2a7cdb5b980485245cd99d38bf4d119ad5f89d6f"
+          }
+        }
+      },
+      {
+        "game": "CHCrossword",
+        "passed": true,
+        "compared_frames": 6,
+        "frames": {
+          "upstream": {
+            "frame00000.png": "9a5a06d62328a4504ac843d4016a127ee060e650294045cdec3ee366bedaf812",
+            "frame00004.png": "11e42ff0474a535d2602582cb32bb4a7767395d3297b3d3010d22c45f75d5f3f",
+            "frame00008.png": "04da09c0058fb508d0ed32121c1a8ef69b257164bcacb5137658fe8be8b0456f",
+            "frame00012.png": "e5874dec96d5030cf64876001ec3458c530117e1cc126989f73403485b82677b",
+            "frame00016.png": "edd3993a26782d1b94083353b96eed987098ba019fc5cb878a5c6b6f5e927ce2",
+            "frame00020.png": "1acf1d82738965bf48c736acbbcbb6310f185d9486b66022c45c4c5786e60b1e"
+          },
+          "weact": {
+            "frame00000.png": "9a5a06d62328a4504ac843d4016a127ee060e650294045cdec3ee366bedaf812",
+            "frame00004.png": "11e42ff0474a535d2602582cb32bb4a7767395d3297b3d3010d22c45f75d5f3f",
+            "frame00008.png": "04da09c0058fb508d0ed32121c1a8ef69b257164bcacb5137658fe8be8b0456f",
+            "frame00012.png": "e5874dec96d5030cf64876001ec3458c530117e1cc126989f73403485b82677b",
+            "frame00016.png": "edd3993a26782d1b94083353b96eed987098ba019fc5cb878a5c6b6f5e927ce2",
+            "frame00020.png": "1acf1d82738965bf48c736acbbcbb6310f185d9486b66022c45c4c5786e60b1e"
+          }
+        }
+      },
+      {
+        "game": "CHDominoes",
+        "passed": true,
+        "compared_frames": 6,
+        "frames": {
+          "upstream": {
+            "frame00000.png": "29487a407e00cfceaa3a50c59912407aed7e4d7dee3fd365e7233c529c69fb87",
+            "frame00004.png": "253490639bb143ee42c4a0742ca699d608adc179e22a7c7da36d26d4df412794",
+            "frame00008.png": "577af9bbbddaa6c4bd0f63c0f26cb4a8d4f0a9b709a1e04c5e0f887834782f6d",
+            "frame00012.png": "2194fd95ff360e9a33395058dcc08f1fe7c42357ad10e055774dd31d751838ea",
+            "frame00016.png": "8f6bdf75cca89587f70126733be404cbb117a587342d80eb477b877396bd27f7",
+            "frame00020.png": "b60ebac1512a01d0517cf5f01f982bb4dab0e67ddd0d2e5cbe2488ce04e2629d"
+          },
+          "weact": {
+            "frame00000.png": "29487a407e00cfceaa3a50c59912407aed7e4d7dee3fd365e7233c529c69fb87",
+            "frame00004.png": "253490639bb143ee42c4a0742ca699d608adc179e22a7c7da36d26d4df412794",
+            "frame00008.png": "577af9bbbddaa6c4bd0f63c0f26cb4a8d4f0a9b709a1e04c5e0f887834782f6d",
+            "frame00012.png": "2194fd95ff360e9a33395058dcc08f1fe7c42357ad10e055774dd31d751838ea",
+            "frame00016.png": "8f6bdf75cca89587f70126733be404cbb117a587342d80eb477b877396bd27f7",
+            "frame00020.png": "b60ebac1512a01d0517cf5f01f982bb4dab0e67ddd0d2e5cbe2488ce04e2629d"
+          }
+        }
+      },
+      {
+        "game": "CHFour",
+        "passed": true,
+        "compared_frames": 6,
+        "frames": {
+          "upstream": {
+            "frame00000.png": "19867bc1428ca68930dfc4a3d3d7dd19fa7e11102598bd1e4bb51bbde01b86e6",
+            "frame00004.png": "11322becca46f1daeaca39691757b646a6879b4ce434b8cfc726e2b086ebc2d9",
+            "frame00008.png": "f7c0ff512120d14f70bf8836fd671f759db4b2611ef8013557c11dd406231fbb",
+            "frame00012.png": "548f69300afed9f167da0a16dffe52caf513b595a27796f022f0942654441c02",
+            "frame00016.png": "01e70e7186b7dab38c215a558daa549d72c9ce376ee0e12ba47a56ff38bfd0a9",
+            "frame00020.png": "743ead1442330d9ddfb464c083654ce480c987956659f8828354eb071067fa1d"
+          },
+          "weact": {
+            "frame00000.png": "19867bc1428ca68930dfc4a3d3d7dd19fa7e11102598bd1e4bb51bbde01b86e6",
+            "frame00004.png": "11322becca46f1daeaca39691757b646a6879b4ce434b8cfc726e2b086ebc2d9",
+            "frame00008.png": "f7c0ff512120d14f70bf8836fd671f759db4b2611ef8013557c11dd406231fbb",
+            "frame00012.png": "548f69300afed9f167da0a16dffe52caf513b595a27796f022f0942654441c02",
+            "frame00016.png": "01e70e7186b7dab38c215a558daa549d72c9ce376ee0e12ba47a56ff38bfd0a9",
+            "frame00020.png": "743ead1442330d9ddfb464c083654ce480c987956659f8828354eb071067fa1d"
+          }
+        }
+      },
+      {
+        "game": "CHMahjong",
+        "passed": true,
+        "compared_frames": 6,
+        "frames": {
+          "upstream": {
+            "frame00000.png": "25900409fa6b8ddd0b5297a8991be5137e4fe98e5d23019beccc0a6eaae5a6cc",
+            "frame00004.png": "b9cefd392909b1390bb63554d1b1587bbc6ab8f4ec54eaf9ce3ec6a1315112d7",
+            "frame00008.png": "cdd95e36b874ec902d48013bce6bd24ee10faab506edf4f74f2386f23d570ea5",
+            "frame00012.png": "b662196a4c63a9c9e743a47d6bfd9c6b9bcad29c987b7e9b3b9c9e83f5b5561c",
+            "frame00016.png": "2949cadebf666cb93f3464a01b12e55815d6e857d507f2ba0e8c0b090e602762",
+            "frame00020.png": "bfc03c153da5bbcc76703e95116b55dcb77225e49c655ae04a8537e8c0dc8ce5"
+          },
+          "weact": {
+            "frame00000.png": "25900409fa6b8ddd0b5297a8991be5137e4fe98e5d23019beccc0a6eaae5a6cc",
+            "frame00004.png": "b9cefd392909b1390bb63554d1b1587bbc6ab8f4ec54eaf9ce3ec6a1315112d7",
+            "frame00008.png": "cdd95e36b874ec902d48013bce6bd24ee10faab506edf4f74f2386f23d570ea5",
+            "frame00012.png": "b662196a4c63a9c9e743a47d6bfd9c6b9bcad29c987b7e9b3b9c9e83f5b5561c",
+            "frame00016.png": "2949cadebf666cb93f3464a01b12e55815d6e857d507f2ba0e8c0b090e602762",
+            "frame00020.png": "bfc03c153da5bbcc76703e95116b55dcb77225e49c655ae04a8537e8c0dc8ce5"
+          }
+        }
+      },
+      {
+        "game": "CHPoker",
+        "passed": true,
+        "compared_frames": 6,
+        "frames": {
+          "upstream": {
+            "frame00000.png": "3d1689155253ec662af698899531fccef6d83ee82527c8d2ec2e8d353ed9fdf4",
+            "frame00004.png": "8b5f1d998d2cc3230ecfe46bad8a25fd95a0b5ee9b7ca99f83c9c130fffacabe",
+            "frame00008.png": "d1c2a21b5db229c1321cc8efa5781e451d6b0c83037dd325d4ff5a73e4fb6387",
+            "frame00012.png": "275ac7fd057b616261118b427560bd0ba51d74585626f0b1b50746702a643b3e",
+            "frame00016.png": "13c4c6de81f3ce40a4f01389e65ec63b98a592a934de3fda3552ff8957ef9dc4",
+            "frame00020.png": "6e567de83d09402059a91437cb24129c5de04562b919a8da3252634bd142c790"
+          },
+          "weact": {
+            "frame00000.png": "3d1689155253ec662af698899531fccef6d83ee82527c8d2ec2e8d353ed9fdf4",
+            "frame00004.png": "8b5f1d998d2cc3230ecfe46bad8a25fd95a0b5ee9b7ca99f83c9c130fffacabe",
+            "frame00008.png": "d1c2a21b5db229c1321cc8efa5781e451d6b0c83037dd325d4ff5a73e4fb6387",
+            "frame00012.png": "275ac7fd057b616261118b427560bd0ba51d74585626f0b1b50746702a643b3e",
+            "frame00016.png": "13c4c6de81f3ce40a4f01389e65ec63b98a592a934de3fda3552ff8957ef9dc4",
+            "frame00020.png": "6e567de83d09402059a91437cb24129c5de04562b919a8da3252634bd142c790"
+          }
+        }
+      },
+      {
+        "game": "CHRoulette",
+        "passed": true,
+        "compared_frames": 6,
+        "frames": {
+          "upstream": {
+            "frame00000.png": "df931e6aaf1a1666bd1fc5580cbbb14a383f4e091cbd79bd0a94dc7a856d8d46",
+            "frame00004.png": "782881a1d1ef37daabe679b9135d5002f7c275527b67ab297ce96e00aa4caac5",
+            "frame00008.png": "93725af55a5dc7359b375a141851f21cad0e8628ac148bc4ef0045f412191513",
+            "frame00012.png": "9fc246dfcc24b9a35791bd8230b024d15b60789ad9c54b8cac6d27571b84a739",
+            "frame00016.png": "da4cdb9153657e0ff144787b4cb1b8375018b0d3fbb11f03a06638af21f1408c",
+            "frame00020.png": "2912d820243ef957b6198be7207f5d6bc53ceee470d5fe0217bcd9bbce4e474f"
+          },
+          "weact": {
+            "frame00000.png": "df931e6aaf1a1666bd1fc5580cbbb14a383f4e091cbd79bd0a94dc7a856d8d46",
+            "frame00004.png": "782881a1d1ef37daabe679b9135d5002f7c275527b67ab297ce96e00aa4caac5",
+            "frame00008.png": "93725af55a5dc7359b375a141851f21cad0e8628ac148bc4ef0045f412191513",
+            "frame00012.png": "9fc246dfcc24b9a35791bd8230b024d15b60789ad9c54b8cac6d27571b84a739",
+            "frame00016.png": "da4cdb9153657e0ff144787b4cb1b8375018b0d3fbb11f03a06638af21f1408c",
+            "frame00020.png": "2912d820243ef957b6198be7207f5d6bc53ceee470d5fe0217bcd9bbce4e474f"
+          }
+        }
+      },
+      {
+        "game": "CHSlots",
+        "passed": true,
+        "compared_frames": 6,
+        "frames": {
+          "upstream": {
+            "frame00000.png": "5350b2f6cd4c79557ae0b3a17375b9858862a3690725f5b00559b98ac41fd4cb",
+            "frame00004.png": "f49da97909bf1fef27e238d82d331a3b57af8e4ccb467a036cd67551374018df",
+            "frame00008.png": "0d29ce3da80932824d38d1793c55760c87f8b0aef3bee1bbadcc79055aa1e00d",
+            "frame00012.png": "6b51602c861b22fa53cf01ce6cfb99ed3553d42dfbaae1354140d11e8b978c5a",
+            "frame00016.png": "c726b7362b60d371f10600f5f218f6d78351892fe63e3d365c9d89e3dfd13279",
+            "frame00020.png": "f78616965593006f911adb8fb763cb556effff0a5a8524012b8de42d5721696a"
+          },
+          "weact": {
+            "frame00000.png": "5350b2f6cd4c79557ae0b3a17375b9858862a3690725f5b00559b98ac41fd4cb",
+            "frame00004.png": "f49da97909bf1fef27e238d82d331a3b57af8e4ccb467a036cd67551374018df",
+            "frame00008.png": "0d29ce3da80932824d38d1793c55760c87f8b0aef3bee1bbadcc79055aa1e00d",
+            "frame00012.png": "6b51602c861b22fa53cf01ce6cfb99ed3553d42dfbaae1354140d11e8b978c5a",
+            "frame00016.png": "c726b7362b60d371f10600f5f218f6d78351892fe63e3d365c9d89e3dfd13279",
+            "frame00020.png": "f78616965593006f911adb8fb763cb556effff0a5a8524012b8de42d5721696a"
+          }
+        }
+      },
+      {
+        "game": "CHSnakes",
+        "passed": true,
+        "compared_frames": 6,
+        "frames": {
+          "upstream": {
+            "frame00000.png": "979af74946a5d33e5d67cb74a6dc75d5be7b3854520050ef6b33184495e95ff6",
+            "frame00004.png": "bb436a519aa2855350a67859400a4fe70531cd7d47b351fd2e385d355137dd2d",
+            "frame00008.png": "f2d555f972712550e3c65eea06c16096662f0e50c3653f8a7d7ddea88f7fb227",
+            "frame00012.png": "cb34470d9e257cd8b385681f35eb70507bd278eebbca9820e8e29b63d713efff",
+            "frame00016.png": "9f114bcc605468f9a3b4b723096dd497d419f45c67b5a90a60526e255faacbf8",
+            "frame00020.png": "e78a0d11bd589d708ea531731b6ed37028b6df3c17b3cb7dd2722c4c8341951a"
+          },
+          "weact": {
+            "frame00000.png": "979af74946a5d33e5d67cb74a6dc75d5be7b3854520050ef6b33184495e95ff6",
+            "frame00004.png": "bb436a519aa2855350a67859400a4fe70531cd7d47b351fd2e385d355137dd2d",
+            "frame00008.png": "f2d555f972712550e3c65eea06c16096662f0e50c3653f8a7d7ddea88f7fb227",
+            "frame00012.png": "cb34470d9e257cd8b385681f35eb70507bd278eebbca9820e8e29b63d713efff",
+            "frame00016.png": "9f114bcc605468f9a3b4b723096dd497d419f45c67b5a90a60526e255faacbf8",
+            "frame00020.png": "e78a0d11bd589d708ea531731b6ed37028b6df3c17b3cb7dd2722c4c8341951a"
+          }
+        }
+      },
+      {
+        "game": "CHSolitaire",
+        "passed": true,
+        "compared_frames": 6,
+        "frames": {
+          "upstream": {
+            "frame00000.png": "484975778428fe5493b3ed7956e48b86b40ce389ca55afe0e19aca0baa4093f4",
+            "frame00004.png": "e5956dc059852a04b91a49b3a44e339b9bdf926d6896f71b274524130ab40544",
+            "frame00008.png": "0245d9548bf2822b49a66e827cdfd01cc4f7c84e60d2d84482451fec76ef0d9f",
+            "frame00012.png": "d9e22c5bb7f08afa35e890350d5c510386d66b6010d16d19929276848241cc4e",
+            "frame00016.png": "0280e23bcb3ac63addae696777c748283041f4465844e6b9ecadd7d60c546458",
+            "frame00020.png": "806d92f06b31703c03e40673b622bca383d50021961f3280b2d835c87fd0c7b0"
+          },
+          "weact": {
+            "frame00000.png": "484975778428fe5493b3ed7956e48b86b40ce389ca55afe0e19aca0baa4093f4",
+            "frame00004.png": "e5956dc059852a04b91a49b3a44e339b9bdf926d6896f71b274524130ab40544",
+            "frame00008.png": "0245d9548bf2822b49a66e827cdfd01cc4f7c84e60d2d84482451fec76ef0d9f",
+            "frame00012.png": "d9e22c5bb7f08afa35e890350d5c510386d66b6010d16d19929276848241cc4e",
+            "frame00016.png": "0280e23bcb3ac63addae696777c748283041f4465844e6b9ecadd7d60c546458",
+            "frame00020.png": "806d92f06b31703c03e40673b622bca383d50021961f3280b2d835c87fd0c7b0"
+          }
+        }
+      },
+      {
+        "game": "CHTicTacToe",
+        "passed": true,
+        "compared_frames": 6,
+        "frames": {
+          "upstream": {
+            "frame00000.png": "38891a560f34f691780626537147fc12a3070ef45278e798b04f8d057d544092",
+            "frame00004.png": "3cbf2123efb96f5e47055e75dfbe709739850d96ebf11a203c3f6e93ddad0c10",
+            "frame00008.png": "c0069cbf8ba4369bfc46bbcf02ffff1f242e63ca77ed858ee89a409f7d2eaa83",
+            "frame00012.png": "f4636ba0cc7d428dd4d348d21bfa5383f1096eaef429a1728ea3d7810d4fcc78",
+            "frame00016.png": "e699e8e5d1aefe909c0f45a059a3a37682a01cf5e7210fb48c40edebc458edea",
+            "frame00020.png": "0df2ab166058ba54e4b619a50468f709e5c53ebc0adf379d45384c76470bf0e8"
+          },
+          "weact": {
+            "frame00000.png": "38891a560f34f691780626537147fc12a3070ef45278e798b04f8d057d544092",
+            "frame00004.png": "3cbf2123efb96f5e47055e75dfbe709739850d96ebf11a203c3f6e93ddad0c10",
+            "frame00008.png": "c0069cbf8ba4369bfc46bbcf02ffff1f242e63ca77ed858ee89a409f7d2eaa83",
+            "frame00012.png": "f4636ba0cc7d428dd4d348d21bfa5383f1096eaef429a1728ea3d7810d4fcc78",
+            "frame00016.png": "e699e8e5d1aefe909c0f45a059a3a37682a01cf5e7210fb48c40edebc458edea",
+            "frame00020.png": "0df2ab166058ba54e4b619a50468f709e5c53ebc0adf379d45384c76470bf0e8"
+          }
+        }
+      },
+      {
+        "game": "CHWordWheel",
+        "passed": true,
+        "compared_frames": 6,
+        "frames": {
+          "upstream": {
+            "frame00000.png": "cbad054cb86f46a0b8db15828787bdbb0a85324b6fc2e327028c22d20e8ad5c6",
+            "frame00004.png": "b8f5c4b285e01ab5552e314d809d4693bf5710ed6680357a2b6c6946bd86af58",
+            "frame00008.png": "a06f6641acb9cf021c7333b052ae84f5818b9d15b068853f824ed8021f9a80ae",
+            "frame00012.png": "ba1e4163a182aae5abf219678f55cb595893f68499db5d59e716255964e6680f",
+            "frame00016.png": "385486e58c9a699514443ba0586cea4b55bfffce2eb2e56f81e92af5d08243d0",
+            "frame00020.png": "8ceb10897ce32b3dfc4717d85f15ed3c21b5ae2c61fc0d752bfa7cf66a7d47ca"
+          },
+          "weact": {
+            "frame00000.png": "cbad054cb86f46a0b8db15828787bdbb0a85324b6fc2e327028c22d20e8ad5c6",
+            "frame00004.png": "b8f5c4b285e01ab5552e314d809d4693bf5710ed6680357a2b6c6946bd86af58",
+            "frame00008.png": "a06f6641acb9cf021c7333b052ae84f5818b9d15b068853f824ed8021f9a80ae",
+            "frame00012.png": "ba1e4163a182aae5abf219678f55cb595893f68499db5d59e716255964e6680f",
+            "frame00016.png": "385486e58c9a699514443ba0586cea4b55bfffce2eb2e56f81e92af5d08243d0",
+            "frame00020.png": "8ceb10897ce32b3dfc4717d85f15ed3c21b5ae2c61fc0d752bfa7cf66a7d47ca"
+          }
+        }
+      },
+      {
+        "game": "CHWords",
+        "passed": true,
+        "compared_frames": 6,
+        "frames": {
+          "upstream": {
+            "frame00000.png": "074b6181230b3cf7f6279d721498232f895f99046b30f330b08e96a56bf943a7",
+            "frame00004.png": "17cc5a8c6bfe6a7c7604a921ac64c0e0b3b3ec5b72d4c348ea97713b552e8a52",
+            "frame00008.png": "ac74ea8b37b00d186f38c65bd7eefaee972a7d24bc441ecd4f4848e32edb20ae",
+            "frame00012.png": "036cb0d6dcea2b13840abeb85d2e5119c09cf433dffcdfa396a4b033215a4667",
+            "frame00016.png": "1b3dc718c4d279c444adeb57cce02c035b02b82a71870150df5cfed627c95114",
+            "frame00020.png": "cd5b78c41539bc9483b95bcccefbda894569927b408dfd84cb5a3a808429881f"
+          },
+          "weact": {
+            "frame00000.png": "074b6181230b3cf7f6279d721498232f895f99046b30f330b08e96a56bf943a7",
+            "frame00004.png": "17cc5a8c6bfe6a7c7604a921ac64c0e0b3b3ec5b72d4c348ea97713b552e8a52",
+            "frame00008.png": "ac74ea8b37b00d186f38c65bd7eefaee972a7d24bc441ecd4f4848e32edb20ae",
+            "frame00012.png": "036cb0d6dcea2b13840abeb85d2e5119c09cf433dffcdfa396a4b033215a4667",
+            "frame00016.png": "1b3dc718c4d279c444adeb57cce02c035b02b82a71870150df5cfed627c95114",
+            "frame00020.png": "cd5b78c41539bc9483b95bcccefbda894569927b408dfd84cb5a3a808429881f"
+          }
+        }
+      },
+      {
+        "game": "CHYacht",
+        "passed": true,
+        "compared_frames": 6,
+        "frames": {
+          "upstream": {
+            "frame00000.png": "1d5778e81e95764db0e9f5828dc441717a5f23d586a3c034b74cadfd3323a260",
+            "frame00004.png": "75865843c58743a596a6d5f047ebc81a98a6061e049bdb00dbece609de6d738d",
+            "frame00008.png": "b89636ee1a379d35bf3c4c1c77d099d622ba8d0bbb18d7bda69ab6768a928d6f",
+            "frame00012.png": "e43d3a99fc7705b4361edfe8bf26daab06ce860dc1ccef390bd320d01e83d4d5",
+            "frame00016.png": "97ffbc4b8d80b9326607a13d1c3694e4be83f1be435ef1b566b05b526aa30642",
+            "frame00020.png": "80884763bca15f538236e96472b6435f322a95d5100b3eff2c5859d04c844f07"
+          },
+          "weact": {
+            "frame00000.png": "1d5778e81e95764db0e9f5828dc441717a5f23d586a3c034b74cadfd3323a260",
+            "frame00004.png": "75865843c58743a596a6d5f047ebc81a98a6061e049bdb00dbece609de6d738d",
+            "frame00008.png": "b89636ee1a379d35bf3c4c1c77d099d622ba8d0bbb18d7bda69ab6768a928d6f",
+            "frame00012.png": "e43d3a99fc7705b4361edfe8bf26daab06ce860dc1ccef390bd320d01e83d4d5",
+            "frame00016.png": "97ffbc4b8d80b9326607a13d1c3694e4be83f1be435ef1b566b05b526aa30642",
+            "frame00020.png": "80884763bca15f538236e96472b6435f322a95d5100b3eff2c5859d04c844f07"
+          }
+        }
+      }
+    ]
+  },
+  "rev0_bootloaders": {
+    "list_flash": 11928,
+    "visual_flash": 12068,
+    "built": true
+  },
+  "limits": [
+    "No physical hardware was connected or flashed.",
+    "Other host operating systems/toolchain packages were not built.",
+    "The optional real-card native fixture and optional JSON-schema test were skipped.",
+    "Go compiler tests and a complete Arduino CLI release-staging run were not run.",
+    "Simulator comparisons cover deterministic 24-frame samples, not exhaustive gameplay."
+  ]
+}

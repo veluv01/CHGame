@@ -1,3 +1,4 @@
+# Modified 2026-10-11: WeAct F8U6 hardware variant; see docs/weact-f8u6.md.
 """Where games come from: a sketch folder (built, described by its
 chgame.json), a raw .bin, an Intel .hex, the build's .elf, a .chg, or
 another .chgame.
@@ -285,13 +286,13 @@ def from_sketch(d, image, device="rev0"):
 def build_sketch(d, device="rev0"):
     """Compiles the sketch (release) and returns its Game."""
     import device as dev                    # tools/device.py
-    out = dev.build(d)
+    out = dev.build(d, target=device)
     return from_sketch(d, (out / f"{pathlib.Path(d).name}.ino.bin").read_bytes(), device)
 
 
 # ---- anything -----------------------------------------------------------------------
 
-def load_item(item, build=True, title=None):
+def load_item(item, build=True, title=None, device="rev0"):
     """[Game] from a path: a .chgame (all its games), a .bin/.hex/.elf/.chg,
     or a sketch folder (built unless build=False, then its build/release
     .bin); or the name of a game or app in this repository (CHFour)."""
@@ -301,15 +302,16 @@ def load_item(item, build=True, title=None):
         p = paths.sketch(str(item))
     if p.is_dir():
         if build:
-            return [build_sketch(p)]
-        b = p / "build" / "release" / f"{p.name}.ino.bin"
+            return [build_sketch(p, device)]
+        import device as dev
+        b = dev.build_path(p, target=device) / f"{p.name}.ino.bin"
         if not b.exists():
             raise CartError([Issue("missing-file", str(p), f"{b} is missing: build it, or drop --no-build")])
-        return [from_sketch(p, b.read_bytes())]
+        return [from_sketch(p, b.read_bytes(), device)]
     if p.suffix.lower() == ".chgame":
         return zipio.load(p).games
     if p.suffix.lower() in BINARY_SUFFIXES:
-        return [from_binary(p, title)]
+        return [from_binary(p, title, device=device)]
     raise CartError([Issue("bad-field", str(p), "not a .chgame, .bin, .hex, .elf, .chg or sketch folder")])
 
 

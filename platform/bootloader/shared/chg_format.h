@@ -1,3 +1,4 @@
+/* Modified 2026-10-11: WeAct F8U6 hardware variant; see docs/weact-f8u6.md. */
 /*
  * CHGame package (.CHG), format version 1 - the file the SD game menu
  * installs. spec/chg.md is the normative description; tools/chgpack.py
@@ -30,6 +31,7 @@
  * every later board is "CGR<n>". A bootloader installs only its own board's.
  * Ids are never reused or reassigned. */
 #define CHG_TARGET_REV0      0x35335843u   /* "CX35": CHGame Rev0 (CH32X035G8U6) */
+#define CHG_TARGET_WEACT_F8U6 0x36384657u   /* "WF86": WeAct CH32X035F8U6 */
 #define CHG_TARGET_REV1      0x31524743u   /* "CGR1": reserved for CHGame Rev1, not yet defined */
 
 /* The board this bootloader is built for. A rev0 build defines nothing, and
@@ -41,6 +43,13 @@
 #define CHG_TARGET_ID        CHGAME_BOARD_TARGET
 #else
 #define CHG_TARGET_ID        CHG_TARGET_REV0
+#endif
+
+#if defined(CHBOOT_WEACT_F8U6) && CHG_TARGET_ID != CHG_TARGET_WEACT_F8U6
+#error "WeAct pins require the WF86 target id"
+#endif
+#if !defined(CHBOOT_WEACT_F8U6) && CHG_TARGET_ID == CHG_TARGET_WEACT_F8U6
+#error "WF86 target id requires CHBOOT_WEACT_F8U6"
 #endif
 
 /* Field offsets. */

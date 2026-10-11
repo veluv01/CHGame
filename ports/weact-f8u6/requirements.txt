@@ -1,0 +1,3 @@
+# Install with the interpreter that runs PlatformIO.
+platformio==6.1.19
+pyserial>=3.5,<4

@@ -1,5 +1,13 @@
 # The bootloaders Burn Bootloader offers
 
+The **WeAct F8U6** board choice selects separate `chgame_weact_*.bin`
+images with target ID **WF86** and the WeAct pin map. The five images here
+were compiled from this checkout with PlatformIO 6.1.19 and pinned WCH GCC 8.
+Rebuild and copy them after source updates with
+`python3 ports/weact-f8u6/build_all.py --install-bootloaders` from the repo
+root. See [the build report](../../../../../../docs/weact-f8u6-builds.md).
+They share the memory layout with Rev0 and require their own board's images.
+
 *Tools > Bootloader* chooses one, *Tools > Programmer* how it is written
 (**CHGame USB**: through the CHGame bootloader already on the board, no
 driver; **WCH factory ISP**: hold BOOT on power-up, needs the driver), and

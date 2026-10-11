@@ -1,5 +1,8 @@
+/* Modified 2026-10-11: WeAct F8U6 hardware variant; see docs/weact-f8u6.md. */
 /// @file Audio.h
 /// @brief Sound and the status LED: a small sequencer for the piezo.
+/// On the WeAct F8U6 target all calls are no-ops; on(), playing() and
+/// musicPlaying() return false. No sound timer or LED GPIO is configured.
 ///
 /// One pin plays one note at a time, driven by TIM1 channel 2 on PB10 and
 /// stepped by the core's 1 kHz SysTick hook, so no other timer is used. It

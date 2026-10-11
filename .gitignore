@@ -1,14 +1,21 @@
 # Build output (each game and platform piece also has its own .gitignore)
 build/
 out/
+.pio/
+# Uploader copy generated inside Arduino release archives, never maintained here
+/platform/board/arduino/CHGame/tools/weact_python/
 tools/chsim/build/
 
 # Python
 __pycache__/
 *.pyc
 
+# PlatformIO's temporary Arduino translation units in upstream sketch folders
+*.ino.cpp
+
 # Editor and OS clutter
 .vscode/
+.venv-weact/
 .DS_Store
 Thumbs.db
 

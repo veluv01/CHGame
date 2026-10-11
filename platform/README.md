@@ -1,5 +1,15 @@
 # platform/
 
+This checkout adds the **WeAct CH32X035F8U6** variant and a local PlatformIO
+project using these master sources. The build matrix covers all 20 games,
+three apps, bringup, Hello, a debug game and five WeAct bootloaders.
+[Wiring/setup](../docs/weact-f8u6.md) and
+[build results](../docs/weact-f8u6-builds.md) document the variant.
+The WeAct branch omits sound/status LED writes and preserves SDI debug pins;
+Rev0 retains its existing pin map and sound APIs.
+See [variant maintenance](../docs/weact-f8u6-maintenance.md) for upstream
+merges, source checks and Arduino release packaging.
+
 The CHGame platform: the board package, the bootloader, the libraries and
 the hardware files. **These are the master copies.** Each piece began in a
 repository of its own; those are frozen, and every fix and feature is made

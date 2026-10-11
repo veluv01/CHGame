@@ -1,3 +1,4 @@
+# Modified 2026-10-11: WeAct F8U6 hardware variant; see docs/weact-f8u6.md.
 # CH32 Core and platform.
 # ------------------------------
 #
@@ -98,7 +99,7 @@ build.pid=0
 
 # Build information's     
 #####################-D{build.board} -DARDUINO_ARCH_{build.arch} -DBOARD_NAME="{build.board}" -DVARIANT_H="{build.variant_h}"
-build.info.flags=-DARDUINO_ARCH_CH32 -D{build.series} -DARDUINO={runtime.ide.version} -D{build.chip} -DVARIANT_H="{build.variant_h}" {build.usb_flags}
+build.info.flags=-DARDUINO_{build.board} {build.flags.board} -DARDUINO_ARCH_CH32 -D{build.series} -DARDUINO={runtime.ide.version} -D{build.chip} -DVARIANT_H="{build.variant_h}" {build.usb_flags}
 
 # Defaults config
 build.xSerial=
@@ -116,6 +117,10 @@ build.flags.ldspecs=
 build.flags.ltolink=
 # Peripheral trimming defines; boards.txt sets this from the Peripherals menu.
 build.flags.periph=
+# Each board may add fixed hardware flags and select its package/upload host.
+build.flags.board=
+build.chgame_device=rev0
+build.chgame_host="{tools.chgame_upload.path}/{tools.chgame_upload.cmd}"
 build.flash_offset=0
 
 # Pre and post build hooks
@@ -155,7 +160,7 @@ recipe.objcopy.hex.pattern="{compiler.path}{compiler.objcopy.cmd}" {compiler.elf
 ## Create output (.chg file): the package the bootloader's SD game menu
 ## installs from the card's GAMES folder (the sketch's name, in capitals, is
 ## its title). Sketch > Export Compiled Binary copies it beside the sketch.
-recipe.hooks.objcopy.postobjcopy.1.pattern="{tools.chgame_upload.path}/{tools.chgame_upload.cmd}" pack "{build.path}/{build.project_name}.bin"
+recipe.hooks.objcopy.postobjcopy.1.pattern={build.chgame_host} pack "{build.path}/{build.project_name}.bin" -device {build.chgame_device}
 
 ##Create output (.lst file)
 #recipe.objcopy.lst.pattern="{compiler.path}{compiler.objdump.cmd}" {compiler.objdump.flags} {compiler.elf2lst.extra_flags} "{build.path}/{build.project_name}.elf" "{build.path}/{build.project_name}.lst"
@@ -202,14 +207,14 @@ tools.chgame_upload.wchisp={runtime.tools.wchisp.path}/wchisp
 tools.chgame_upload.wchisp.windows={runtime.tools.wchisp.path}/wchisp.exe
 tools.chgame_upload.upload.params.verbose=-verbose
 tools.chgame_upload.upload.params.quiet=-quiet
-tools.chgame_upload.upload.pattern="{path}/{cmd}" {upload.verbose} -port "{serial.port}" flash "{build.path}/{build.project_name}.bin" -run
+tools.chgame_upload.upload.pattern={build.chgame_host} {upload.verbose} -port "{serial.port}" flash "{build.path}/{build.project_name}.bin" -device {build.chgame_device} -run
 
 # Arduino runs a separate chip-erase step before Burn Bootloader. Both ways of
 # writing a bootloader erase what they need themselves, so this is an explicit
 # no-op rather than a second erase.
 tools.chgame_upload.erase.params.verbose=-verbose
 tools.chgame_upload.erase.params.quiet=-quiet
-tools.chgame_upload.erase.pattern="{path}/{cmd}" noop
+tools.chgame_upload.erase.pattern={build.chgame_host} noop
 
 # Burn Bootloader writes the bootloader chosen in Tools > Bootloader
 # ({bootloader.file}, boards.txt). The programmer chosen in Tools > Programmer
@@ -228,14 +233,14 @@ tools.chgame_upload.burn.method=usb
 tools.chgame_upload.burn.port=-port "{serial.port}"
 tools.chgame_upload.bootloader.params.verbose=-verbose
 tools.chgame_upload.bootloader.params.quiet=-quiet
-tools.chgame_upload.bootloader.pattern="{path}/{cmd}" {bootloader.verbose} {burn.port} burn -method {burn.method} -wchisp "{tools.chgame_upload.wchisp}" -bootloader "{runtime.platform.path}/bootloaders/{bootloader.file}"
+tools.chgame_upload.bootloader.pattern={build.chgame_host} {bootloader.verbose} {burn.port} burn -method {burn.method} -wchisp "{tools.chgame_upload.wchisp}" -bootloader "{runtime.platform.path}/bootloaders/{bootloader.file}"
 
 # Upload Using Programmer: the same, then this sketch. With the factory ISP it
 # is one write, and puts a board with no working bootloader straight back to
 # running the sketch in front of you.
 tools.chgame_upload.program.params.verbose=-verbose
 tools.chgame_upload.program.params.quiet=-quiet
-tools.chgame_upload.program.pattern="{path}/{cmd}" {program.verbose} {burn.port} burn -method {burn.method} -wchisp "{tools.chgame_upload.wchisp}" -bootloader "{runtime.platform.path}/bootloaders/{bootloader.file}" -app "{build.path}/{build.project_name}.bin"
+tools.chgame_upload.program.pattern={build.chgame_host} {program.verbose} {burn.port} burn -method {burn.method} -wchisp "{tools.chgame_upload.wchisp}" -bootloader "{runtime.platform.path}/bootloaders/{bootloader.file}" -app "{build.path}/{build.project_name}.bin"
 
 # Debugger configuration (general options)
 # ----------------------------------------

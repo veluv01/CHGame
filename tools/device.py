@@ -1,3 +1,4 @@
+# Modified 2026-10-11: WeAct F8U6 hardware variant; see docs/weact-f8u6.md.
 """Build, upload and drive a CHGame sketch on the attached board.
 
     chgame build [--debug]                 compile (release by default)
@@ -30,6 +31,7 @@ instead, the path an IDE user takes. `run` and `shot` talk to the sketch
 through its tools/chsim/chdrive.py. Needs the CHGame board package 0.2.4+.
 """
 import argparse
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -43,11 +45,40 @@ FQBN_DEBUG = "CHGame:ch32v:rev0:opt=oslto,rtlib=nano,periph=game"
 FQBN_RELEASE = FQBN_DEBUG + ",usb=uploadonly"
 
 
-def fqbn(sketch, debug=False):
-    """The board and options a sketch builds with: its tools/game.py's FQBN,
-    else the release or debug default."""
+def selected_device(sketch, target=None):
+    """Explicit board, CHGAME_DEVICE, sketch FQBN, then the Rev0 default."""
     import gamecfg
-    return gamecfg.load(sketch).FQBN or (FQBN_DEBUG if debug else FQBN_RELEASE)
+    from chcart.model import DEVICES
+    configured = gamecfg.load(sketch).FQBN
+    inferred = configured.split(":")[2] if configured else "rev0"
+    target = target or os.environ.get("CHGAME_DEVICE") or inferred
+    if target not in DEVICES:
+        raise SystemExit(f"unknown board {target!r} (known: {', '.join(DEVICES)})")
+    return target
+
+
+def fqbn(sketch, debug=False, target=None):
+    """Retain sketch-specific options, replacing only the selected board."""
+    import gamecfg
+    selected = selected_device(sketch, target)
+    parts = (gamecfg.load(sketch).FQBN or (FQBN_DEBUG if debug else FQBN_RELEASE)).split(":", 3)
+    parts[2] = selected
+    if selected == "weact-f8u6":
+        options = dict(option.split("=", 1) for option in parts[3].split(",")) if len(parts) == 4 and parts[3] else {}
+        options["periph"] = "game"
+        if len(parts) == 3:
+            parts.append("")
+        parts[3] = ",".join(f"{k}={v}" for k, v in options.items())
+    return ":".join(parts)
+
+
+def build_path(sketch, debug=False, target=None):
+    sketch = paths.sketch(sketch)
+    selected = selected_device(sketch, target)
+    base = sketch / "build"
+    if selected != "rev0":
+        base /= selected
+    return base / ("debug" if debug else "release")
 
 
 def defines(sketch):
@@ -57,11 +88,11 @@ def defines(sketch):
     return " ".join(f"-D{d}" for d in gamecfg.load(sketch).DEFINES)
 
 
-def build(sketch, debug=False, flags=""):
+def build(sketch, debug=False, flags="", target=None):
     """Compile; returns the build folder (build/release or build/debug)."""
     sketch = paths.sketch(sketch)
-    out = sketch / "build" / ("debug" if debug else "release")
-    cmd = ["arduino-cli", "compile", "-b", fqbn(sketch, debug), "--build-path", str(out)]
+    out = build_path(sketch, debug, target)
+    cmd = ["arduino-cli", "compile", "-b", fqbn(sketch, debug, target), "--build-path", str(out)]
     extra = " ".join(f for f in (("-DCHGAME_DEBUG=1" if debug else ""), defines(sketch), flags) if f)
     if extra.strip():
         cmd += ["--build-property", "build.extra_flags=" + extra.strip()]
@@ -87,14 +118,15 @@ def image(sketch, out):
     return Path(out) / f"{paths.sketch(sketch).name}.ino.bin"
 
 
-def upload(sketch, out, port=None, arduino=False):
+def upload(sketch, out, port=None, arduino=False, target=None):
     sketch = paths.sketch(sketch)
+    selected = selected_device(sketch, target)
     from serialcap import find_port
     port = port or find_port()
     if not port:
         raise SystemExit("no CHGame found on USB (VID 16C0:27DD): plug it in, or pass --port")
     if arduino:
-        r = subprocess.run(["arduino-cli", "upload", "-b", "CHGame:ch32v:rev0", "-p", port,
+        r = subprocess.run(["arduino-cli", "upload", "-b", fqbn(sketch, target=selected), "-p", port,
                             "--input-dir", str(out), str(sketch)], capture_output=True, text=True)
         if r.returncode:
             sys.stderr.write(r.stdout + r.stderr)
@@ -103,15 +135,15 @@ def upload(sketch, out, port=None, arduino=False):
         return
     from chgame_upload.upload import flash_file
     try:
-        flash_file(image(sketch, out), port=port, run=True)
+        flash_file(image(sketch, out), port=port, run=True, device=selected)
     except Exception as e:                  # NoDevice, StatusError, TimeoutError ...
         raise SystemExit(f"upload failed: {e}")
 
 
-def run(sketch, script, outdir, port=None, flags=""):
+def run(sketch, script, outdir, port=None, flags="", target=None):
     """Debug build, upload, then the sketch's chdrive.py --device on the script."""
     sketch = paths.sketch(sketch)
-    upload(sketch, build(sketch, True, flags), port)
+    upload(sketch, build(sketch, True, flags, target), port, target=target)
     chdrive = sketch / "tools" / "chsim" / "chdrive.py"
     if not chdrive.exists():
         chdrive = REPO / "tools" / "chsim" / "chdrive.py"
@@ -141,12 +173,14 @@ def main(sketch=None, flags=""):
     for name in ("build", "upload"):
         p = sub.add_parser(name)
         p.add_argument("--debug", action="store_true")
+        p.add_argument("--board", choices=("rev0", "weact-f8u6"))
         p.add_argument("--port")
         if name == "upload":
             p.add_argument("--arduino", action="store_true", help="through arduino-cli and the Go tool")
     p = sub.add_parser("run")
     p.add_argument("script")
     p.add_argument("outdir")
+    p.add_argument("--board", choices=("rev0", "weact-f8u6"))
     p.add_argument("--port")
     p = sub.add_parser("shot")
     p.add_argument("out")
@@ -154,11 +188,11 @@ def main(sketch=None, flags=""):
     a = ap.parse_args()
     sketch = paths.sketch(sketch or a.sketch)
     if a.cmd == "build":
-        build(sketch, a.debug, flags)
+        build(sketch, a.debug, flags, a.board)
     elif a.cmd == "upload":
-        upload(sketch, build(sketch, a.debug, flags), a.port, a.arduino)
+        upload(sketch, build(sketch, a.debug, flags, a.board), a.port, a.arduino, a.board)
     elif a.cmd == "run":
-        raise SystemExit(run(sketch, a.script, a.outdir, a.port, flags))
+        raise SystemExit(run(sketch, a.script, a.outdir, a.port, flags, a.board))
     elif a.cmd == "shot":
         shot(sketch, a.out, a.port)
 

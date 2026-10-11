@@ -417,8 +417,8 @@ def check_frames(fdir, pin):
         pinned_path.write_text(json.dumps(pinned, indent=1, sort_keys=True) + "\n", newline="\n")
         print(f"{'frames':12s} {'pinned':6s} {len(now)} frames recorded in frames.json")
         return True
-    # real_* frames come from out/sdcard.img, which only exists after mkcard.py
-    keys = set(now) | {k for k in pinned if not k.startswith("real_")}
+    # Both real_* and v_real_* need the optional generated SD card fixture.
+    keys = set(now) | {k for k in pinned if not k.startswith(("real_", "v_real_"))}
     diff = sorted(k for k in keys if now.get(k) != pinned.get(k))
     print(f"{'frames':12s} {'ok' if not diff else 'FAILED':6s} {len(now)} frames vs frames.json" + (f": changed {diff}" if diff else ""))
     return not diff

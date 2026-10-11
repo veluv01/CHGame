@@ -1,3 +1,4 @@
+/* Modified 2026-10-11: WeAct F8U6 hardware variant; see docs/weact-f8u6.md. */
 /*
  * Application side of the CHGame boot-request handshake.
  *
@@ -63,10 +64,12 @@ void chgame_fault(uint32_t ra, uint32_t sp)
 #endif
 
     RCC->APB2PCENR |= RCC_APB2Periph_GPIOB;
+#if !defined(ARDUINO_CHGAME_WEACT_F8U6)
     CFGHR_tmpB = (CFGHR_tmpB & ~0xFF0u) | 0x330u;    /* PB9, PB10: push-pull outputs */
     GPIOB->CFGHR = CFGHR_tmpB;
     GPIOB->BCR  = 1u << 10;
     GPIOB->BSHR = 1u << 9;
+#endif
 
 #if CHGAME_DEBUG
     /* A sketch can go on answering its PC instead (the CHGame library's debug

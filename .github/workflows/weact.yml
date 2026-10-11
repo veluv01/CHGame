@@ -1,0 +1,53 @@
+name: WeAct F8U6 builds
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: weact-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  firmware:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: ~/.platformio
+          key: weact-linux-gcc8-pio619-${{ hashFiles('ports/weact-f8u6/platform/platform.py', 'ports/weact-f8u6/platform/platform.json') }}
+      - name: Install build tools
+        run: |
+          python3 -m venv .venv-weact
+          .venv-weact/bin/python -m pip install -r ports/weact-f8u6/requirements.txt
+          .venv-weact/bin/python -m pip install pillow numpy
+      - name: Check source contracts
+        run: |
+          .venv-weact/bin/python ports/weact-f8u6/check.py
+          .venv-weact/bin/python -m unittest discover -s ports/weact-f8u6/tests
+      - name: Build environments and all current games
+        run: .venv-weact/bin/python ports/weact-f8u6/build_all.py
+      - name: Check standalone PlatformIO entry point
+        run: .venv-weact/bin/python -m platformio run -d ports/weact-f8u6 -e bringup -e game -e bootloader
+      - name: Uploader and cart tests
+        run: |
+          .venv-weact/bin/python -m unittest discover -s platform/bootloader/test/protocol
+          .venv-weact/bin/python -m unittest discover -s tools/chcart/tests
+      - name: Bootloader native tests
+        run: .venv-weact/bin/python platform/bootloader/test/native/run_tests.py --quick
+      - name: Upload firmware, sizes and logs
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: weact-f8u6-firmware
+          path: ports/weact-f8u6/build/verification/
+          if-no-files-found: error
+          retention-days: 30

@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# Modified 2026-10-11: WeAct F8U6 hardware variant; see docs/weact-f8u6.md.
 # Build the CHGame bootloader (Linux, macOS, or Git Bash on Windows).
 #
 #   ./build.sh [MODE] [--ui=list|visual] [--style=rainbow|static] [--nolto]
@@ -19,6 +20,7 @@
 # --style     the menu's colour 15 (the selection bar, the boxes, #FF00FF in
 #             the card's pictures): rainbow (the default), one colour turning
 #             through the colour wheel; or static
+# --board     rev0 (default), or weact-f8u6 (its pins and WF86 target id)
 # --nolto     build without LTO, for a per-object size breakdown
 # --roomy     link against a 16 KB copy of the script, to measure a build that
 #             does not fit (never flash it)
@@ -38,6 +40,7 @@ MODE=release
 LTO=-flto
 STYLE=rainbow
 UI=list
+BOARD_NAME=rev0
 ROOMY=
 for a in "$@"; do
   case "$a" in
@@ -46,16 +49,32 @@ for a in "$@"; do
     --roomy) ROOMY=1 ;;
     --style=rainbow|--style=static) STYLE="${a#--style=}" ;;
     --ui=list|--ui=visual) UI="${a#--ui=}" ;;
+    --board=rev0|--board=weact-f8u6) BOARD_NAME="${a#--board=}" ;;
     *) echo "unknown argument: $a" >&2; exit 1 ;;
   esac
 done
-OUT="$HERE/build/$MODE"
+BOARD="${CHBOOT_BOARD_TARGET:-}"
+BOARD_DEFS=
+if [ "$BOARD_NAME" = weact-f8u6 ]; then
+  if [ -n "$BOARD" ] && [ "$BOARD" != 0x36384657 ]; then
+    echo "weact-f8u6 requires CHBOOT_BOARD_TARGET=0x36384657 (or unset it)" >&2
+    exit 1
+  fi
+  BOARD=0x36384657
+  BOARD_DEFS="-DCHBOOT_WEACT_F8U6=1 -DCH32V_LOCK_DEBUG"
+  OUT="$HERE/build/weact-f8u6/$MODE"
+else
+  if [ -n "$BOARD" ] && [ "$((BOARD))" -eq "$((0x36384657))" ]; then
+    echo "WF86 requires --board=weact-f8u6 so its pin map is selected too" >&2
+    exit 1
+  fi
+  OUT="$HERE/build/$MODE"
+fi
 [ "$UI" != list ] && OUT="$OUT-$UI"
 [ "$STYLE" != rainbow ] && OUT="$OUT-$STYLE"
 [ -z "$LTO" ] && OUT="$OUT-nolto"
 [ -n "$ROOMY" ] && OUT="$OUT-roomy"
-BOARD="${CHBOOT_BOARD_TARGET:-}"
-[ -n "$BOARD" ] && OUT="$OUT-board$BOARD"
+[ "$BOARD_NAME" = rev0 ] && [ -n "$BOARD" ] && OUT="$OUT-board$BOARD"
 
 # The toolchain ships with the CHGame board package (arduino-cli core install
 # CHGame:ch32v); it is found in the usual Arduino data folders. Override with
@@ -90,7 +109,7 @@ ARCH="-march=rv32imacxw -mabi=ilp32"
 IMAGE_ID=1; [ "$MODE" = app ] && IMAGE_ID=2   # the fault blink tells whose handler caught it
 DEFS="-DCH32X035 -DSYSCLK_FREQ_48MHz_HSI=48000000 -DF_CPU=48000000 -DCHGAME_IMAGE_ID=$IMAGE_ID"
 DEFS="$DEFS -DCHGAME_ALLOW_SELFUPDATE=$SELFUPDATE -DCHBOOT_MENU=$MENU $APPDEF -DMENU_STYLE=MENU_STYLE_$(echo "$STYLE" | tr a-z A-Z)"
-DEFS="$DEFS -DMENU_UI=MENU_UI_$(echo "$UI" | tr a-z A-Z)"
+DEFS="$DEFS -DMENU_UI=MENU_UI_$(echo "$UI" | tr a-z A-Z) $BOARD_DEFS"
 # Defines reach the startup file too, which puts the board id in the image.
 [ -n "$BOARD" ] && DEFS="$DEFS -DCHGAME_BOARD_TARGET=$BOARD"
 INC="-I$SHARED -I$SRC -I$USB -I$SPL -I$SPL/Core -I$SPL/Peripheral/inc"

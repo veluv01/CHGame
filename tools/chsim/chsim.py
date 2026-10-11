@@ -221,7 +221,9 @@ def build(sketch, defines=(), out=None):
             f.write(ino.read_text(encoding="utf-8"))
             f.write("\n")
     srcs = [unit]
-    srcs += sorted(p for p in sketch.glob("*") if p.suffix in (".cpp", ".c"))      # beside the .ino, as Arduino does
+    # PlatformIO's generated .ino.cpp already appears in sketch_ino.cpp above.
+    srcs += sorted(p for p in sketch.glob("*") if p.suffix in (".cpp", ".c")
+                   and not p.name.endswith(".ino.cpp"))
     srcs += sorted(p for p in (sketch / "src").rglob("*") if p.suffix in (".cpp", ".c")) if (sketch / "src").exists() else []
     srcs += sorted(p for p in chgfx.glob("*.cpp") if p.name != "CHGfx.cpp")
     includes = [d for d in (own, HERE / "host") if d.is_dir()] + [sketch, chgfx]

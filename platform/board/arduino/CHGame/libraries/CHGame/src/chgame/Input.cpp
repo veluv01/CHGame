@@ -1,3 +1,4 @@
+/* Modified 2026-10-11: WeAct F8U6 hardware variant; see docs/weact-f8u6.md. */
 #include <Arduino.h>
 #include "Input.h"
 
@@ -7,6 +8,20 @@ CHGame chgame;
 // Direct INDR reads: one register load per port instead of eight
 // digitalRead() calls through the pin map.
 uint8_t chgame_readButtons() {
+#if defined(ARDUINO_CHGAME_WEACT_F8U6)
+    uint32_t a = ~GPIOA->INDR, b = ~GPIOB->INDR, c = ~GPIOC->INDR;
+    uint8_t m = 0;
+    if (b & (1u << 1))  m |= A_BUTTON;
+    if (a & (1u << 1))  m |= B_BUTTON;
+    if (a & (1u << 0))  m |= UP_BUTTON;
+    if (c & (1u << 14)) m |= DOWN_BUTTON;
+    if (b & (1u << 3))  m |= LEFT_BUTTON;
+    if (c & (1u << 15)) m |= RIGHT_BUTTON;
+    if (a & (1u << 2))  m |= START_BUTTON;
+    if (a & (1u << 3))  m |= SELECT_BUTTON;
+    return m;
+#else
+
     uint32_t b = ~GPIOB->INDR, c = ~GPIOC->INDR;
     uint8_t m = 0;
     if (b & (1u << 1))  m |= A_BUTTON;
@@ -18,6 +33,7 @@ uint8_t chgame_readButtons() {
     if (b & (1u << 8))  m |= START_BUTTON;
     if (b & (1u << 7))  m |= SELECT_BUTTON;
     return m;
+#endif
 }
 #endif
 
@@ -33,6 +49,18 @@ extern "C" volatile uint32_t CFGHR_tmpB, CFGHR_tmpC;   // CFGHR is write-only: u
 
 void CHGame::boot() {
 #ifndef CHSIM
+#if defined(ARDUINO_CHGAME_WEACT_F8U6)
+    // Set levels first, then input-with-pull-up. Preserve PA4..7 (SPI),
+    // PB0/PB11/PB12 (LCD/SD), USB and PC18/PC19 (SDI debug).
+    RCC->APB2PCENR |= RCC_APB2Periph_GPIOA | RCC_APB2Periph_GPIOB | RCC_APB2Periph_GPIOC;
+    GPIOA->BSHR = 0x0Fu;
+    GPIOB->BSHR = (1u << 1) | (1u << 3);
+    GPIOC->BSHR = (1u << 14) | (1u << 15);
+    GPIOA->CFGLR = (GPIOA->CFGLR & ~0xFFFFu) | 0x8888u;
+    GPIOB->CFGLR = (GPIOB->CFGLR & ~(NIB(1) | NIB(3))) | PU(1) | PU(3);
+    CFGHR_tmpC = (CFGHR_tmpC & ~(NIB(6) | NIB(7))) | PU(6) | PU(7);
+    GPIOC->CFGHR = CFGHR_tmpC;
+#else
     // Switches to GND, no external pull-ups. One masked write per register:
     // PB1 A, PB3 LEFT, PB4 UP, PB6 B, PB7 SELECT (CFGLR), PB8 START (CFGHR),
     // PC14 DOWN, PC15 RIGHT (CFGHR).
@@ -45,6 +73,7 @@ void CHGame::boot() {
     CFGHR_tmpC = (CFGHR_tmpC & ~(NIB(6) | NIB(7))) | PU(6) | PU(7);
     GPIOC->CFGHR = CFGHR_tmpC;
     GPIOC->BSHR = (1u << 14) | (1u << 15);
+#endif
 #endif
     cur = prev = chgame_readButtons();
 }

@@ -1,3 +1,4 @@
+# Modified 2026-10-11: WeAct F8U6 hardware variant; see docs/weact-f8u6.md.
 """chgame: the one entry point for the CHGame tools.
 
     chgame [--sketch NAME|DIR] <command> [args]
@@ -93,13 +94,13 @@ def game_tool(sketch, *rel):
 
 def cmd_build(a, sketch):
     import device
-    device.build(sketch, a.debug, " ".join(a.D))
+    device.build(sketch, a.debug, " ".join(a.D), target=a.board)
     return 0
 
 
 def cmd_upload(a, sketch):
     import device
-    device.upload(sketch, device.build(sketch, a.debug), a.port, arduino=a.arduino)
+    device.upload(sketch, device.build(sketch, a.debug, target=a.board), a.port, arduino=a.arduino, target=a.board)
     return 0
 
 
@@ -114,7 +115,7 @@ def cmd_sim(a, sketch):
 def cmd_run(a, sketch):
     if a.device:
         import device
-        return device.run(sketch, where(sketch, a.script, must_exist=True), where(sketch, a.outdir), a.port)
+        return device.run(sketch, where(sketch, a.script, must_exist=True), where(sketch, a.outdir), a.port, target=a.board)
     drv = game_tool(sketch, "chsim", "chdrive.py") or TOOLS / "chsim" / "chdrive.py"
     env = dict(os.environ)
     env.pop("CHSD_CARD", None)
@@ -224,9 +225,11 @@ def main(argv=None):
     sub = ap.add_subparsers(dest="cmd", required=True, metavar="command")
 
     p = sub.add_parser("build", help="compile for the board and print the size")
+    p.add_argument("--board", choices=("rev0", "weact-f8u6"))
     p.add_argument("--debug", action="store_true", help="debug build: USB Serial and the debug protocol on")
     p.add_argument("-D", action="append", default=[], metavar="FLAG", help="extra build.extra_flags (e.g. -DX=1)")
     p = sub.add_parser("upload", help="compile and flash")
+    p.add_argument("--board", choices=("rev0", "weact-f8u6"))
     p.add_argument("--debug", action="store_true")
     p.add_argument("--port")
     p.add_argument("--arduino", action="store_true", help="upload through arduino-cli (the Go tool)")
@@ -243,6 +246,7 @@ def main(argv=None):
     p.add_argument("--cost", action="store_true", help="free-run: charge the sketch's own CPU time, scaled to the board")
     p.add_argument("--max-seconds", type=float)
     p = sub.add_parser("run", help="run a chdrive script")
+    p.add_argument("--board", choices=("rev0", "weact-f8u6"))
     p.add_argument("script")
     p.add_argument("outdir")
     p.add_argument("--device", action="store_true", help="debug build, upload, and run on the board")

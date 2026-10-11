@@ -1,3 +1,4 @@
+# Modified 2026-10-11: WeAct F8U6 hardware variant; see docs/weact-f8u6.md.
 """chgame-upload: the CHGame bootloader's uploader (the Python one).
 
     chgame-upload [flags] probe                 list the boards and what each is running
@@ -82,7 +83,7 @@ def _common(top: bool) -> argparse.ArgumentParser:
     return common
 
 
-def parse_args(argv=None):
+def parse_args(argv=None, default_device="rev0"):
     common = _common(top=False)
     ap = argparse.ArgumentParser(prog="chgame-upload", description=__doc__, parents=[_common(top=True)],
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -98,7 +99,8 @@ def parse_args(argv=None):
     f.add_argument("image")
     f.add_argument("--verify", action="store_true", help="read the region back and compare, independently of the device CRC")
     f.add_argument("--run", action="store_true", help="launch the application afterwards")
-    f.add_argument("--device", help="the board the image is built for (rev0): refuse any other board")
+    f.add_argument("--device", default=None if default_device == "rev0" else default_device,
+                   help="the board the image is built for: refuse any other board")
 
     s = sub.add_parser("selfupdate", parents=[common], help="replace the bootloader itself, over USB")
     s.add_argument("image")
@@ -110,7 +112,7 @@ def parse_args(argv=None):
     k.add_argument("--title", help="what the menu shows (default: the sketch's name in capitals)")
     k.add_argument("--author", default="")
     k.add_argument("--gameversion", default="", help="a short version string, e.g. 1.2")
-    k.add_argument("--device", default="rev0", help="the board the image is built for (default rev0)")
+    k.add_argument("--device", default=default_device, help="the board the image is built for (default " + default_device + ")")
 
     for name, help_ in (("provision", "first flash / recovery through the factory ISP (needs BOOT)"),
                         ("burn", "what Burn Bootloader runs: selfupdate (usb) or provision (isp), then the sketch")):
@@ -290,8 +292,8 @@ def cmd_burn(a) -> int:
     raise SystemExit(f'unknown method "{a.method}" (usb or isp)')
 
 
-def main(argv=None) -> int:
-    a = parse_args(argv)
+def main(argv=None, default_device="rev0") -> int:
+    a = parse_args(argv, default_device)
     try:
         return {"probe": cmd_probe, "info": cmd_info, "touch": cmd_touch, "run": cmd_run, "noop": cmd_noop,
                 "flash": cmd_flash, "selfupdate": cmd_selfupdate, "provision": cmd_provision,

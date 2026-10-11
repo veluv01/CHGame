@@ -1,3 +1,4 @@
+/* Modified 2026-10-11: WeAct F8U6 hardware variant; see docs/weact-f8u6.md. */
 /*
  * The few hardware operations the portable parts of the bootloader need: the
  * pins, SPI1, the buttons and the LED. On the board these are static inline
@@ -25,8 +26,8 @@
 #define CHBOOT_APP 0
 #endif
 
-/* Button bits are the port bits themselves: GPIOB 1/3/4/6/7/8 and GPIOC 14/15
- * do not overlap, so one 16-bit mask holds them all. */
+/* Logical button bits are stable across boards. Rev0's physical PB/PC
+ * bits happen to match them; WeAct's PA/PB inputs are translated below. */
 #define BTN_A       (1u << 1)
 #define BTN_LEFT    (1u << 3)
 #define BTN_UP      (1u << 4)
@@ -35,9 +36,15 @@
 #define BTN_START   (1u << 8)
 #define BTN_DOWN    (1u << 14)
 #define BTN_RIGHT   (1u << 15)
+#ifdef CHBOOT_WEACT_F8U6
+#define BTN_PORTA   0x0Fu              /* PA0 UP, PA1 B, PA2 START, PA3 SELECT */
+#define BTN_PORTB   ((1u << 1) | (1u << 3))  /* PB1 A, PB3 LEFT */
+#else
+#define BTN_PORTA   0u
 #define BTN_PORTB   (BTN_A | BTN_LEFT | BTN_UP | BTN_B | BTN_SELECT | BTN_START)
+#endif
 #define BTN_PORTC   (BTN_DOWN | BTN_RIGHT)
-#define BTN_ALL     (BTN_PORTB | BTN_PORTC)
+#define BTN_ALL     (BTN_A | BTN_LEFT | BTN_UP | BTN_B | BTN_SELECT | BTN_START | BTN_DOWN | BTN_RIGHT)
 
 /* SPI1 baud-rate field (CTLR1.BR): SCK = 48 MHz / 2^(BR+1). */
 #define SPI_BR_187K5  7u
@@ -83,11 +90,18 @@ void     hal_reset(void) __attribute__((noreturn));
  * stack's own (USB_init). The USB-only bootloader (CHBOOT_MENU 0, build.sh
  * nomenu) drives the LED and nothing else: the card's, the panel's and the
  * keys' pins stay high-Z too, for a board without those parts. */
+#ifdef CHBOOT_WEACT_F8U6
+#define HAL_GPIOA_CFGLR  0xB8B38888u   /* PA0..3 keys, PA4..7 unchanged SPI */
+#define HAL_GPIOB_CFGLR  0x44448483u   /* PB0 DC, PB1 A, PB3 LEFT */
+#define HAL_GPIOB_CFGHR  0x44433444u   /* PB11 SD_CS, PB12 LCD_RST; no LED/buzzer */
+#define HAL_GPIOC_CFGHR  0x88444444u   /* PC14 DOWN, PC15 RIGHT; debug is in CFGXR */
+#else
 #define HAL_GPIOA_CFGLR  0xB8B34444u   /* PA7 MOSI, PA6 MISO pu, PA5 SCK, PA4 LCD_CS */
 #define HAL_GPIOB_CFGLR  0x88488483u   /* PB7 SEL, PB6 B, PB5 -, PB4 UP, PB3 LEFT, PB2 -, PB1 A, PB0 DC */
 #define HAL_GPIOB_CFGHR  0x44433438u   /* PB12 LCD_RST, PB11 SD_CS, PB10 -, PB9 LED, PB8 START */
 #define HAL_GPIOC_CFGHR  0x88444444u   /* PC15 RIGHT, PC14 DOWN */
 #define HAL_GPIOB_CFGHR_LED 0x44444434u /* (USB only) PB9 LED; every other pin as reset left it */
+#endif
 
 #ifndef CHBOOT_MENU
 #define CHBOOT_MENU 1
@@ -100,15 +114,17 @@ static inline void hal_pins_init(void)
                     | RCC_APB2Periph_GPIOC | RCC_APB2Periph_SPI1;
     /* Levels first, so no pin glitches when it becomes an output: both chip
      * selects, LCD_RST and DC high, MISO and the key pull-ups up, LED low. */
-    GPIOA->BSHR = (1u << 4) | (1u << 6);
+    GPIOA->BSHR = (1u << 4) | (1u << 6) | BTN_PORTA;
     GPIOB->BSHR = (1u << 0) | (1u << 11) | (1u << 12) | BTN_PORTB;
+#ifndef CHBOOT_WEACT_F8U6
     GPIOB->BCR  = 1u << 9;
+#endif
     GPIOC->BSHR = BTN_PORTC;
     GPIOA->CFGLR = HAL_GPIOA_CFGLR;
     GPIOB->CFGLR = HAL_GPIOB_CFGLR;
     GPIOB->CFGHR = HAL_GPIOB_CFGHR;
     GPIOC->CFGHR = HAL_GPIOC_CFGHR;
-#else
+#elif !defined(CHBOOT_WEACT_F8U6)
     RCC->APB2PCENR |= RCC_APB2Periph_GPIOB;
     GPIOB->BCR   = 1u << 9;
     GPIOB->CFGHR = HAL_GPIOB_CFGHR_LED;
@@ -160,12 +176,33 @@ static inline void hal_sd_select(int on)  { if (on) GPIOB->BCR = 1u << 11; else 
 static inline void hal_lcd_select(int on) { if (on) GPIOA->BCR = 1u << 4;  else GPIOA->BSHR = 1u << 4; }
 static inline void hal_lcd_dc(int data)   { if (data) GPIOB->BSHR = 1u << 0; else GPIOB->BCR = 1u << 0; }
 static inline void hal_lcd_rst(int high)  { if (high) GPIOB->BSHR = 1u << 12; else GPIOB->BCR = 1u << 12; }
-static inline void hal_led(int on)        { if (on) GPIOB->BSHR = 1u << 9; else GPIOB->BCR = 1u << 9; }
+static inline void hal_led(int on)
+{
+#ifdef CHBOOT_WEACT_F8U6
+    (void)on;
+#else
+    if (on) GPIOB->BSHR = 1u << 9; else GPIOB->BCR = 1u << 9;
+#endif
+}
 
 /* Pressed keys read low. */
 static inline uint32_t hal_buttons(void)
 {
+#ifdef CHBOOT_WEACT_F8U6
+    uint32_t a = ~GPIOA->INDR, b = ~GPIOB->INDR, c = ~GPIOC->INDR;
+    uint32_t keys = 0;
+    if (a & (1u << 0)) keys |= BTN_UP;
+    if (a & (1u << 1)) keys |= BTN_B;
+    if (a & (1u << 2)) keys |= BTN_START;
+    if (a & (1u << 3)) keys |= BTN_SELECT;
+    if (b & (1u << 1)) keys |= BTN_A;
+    if (b & (1u << 3)) keys |= BTN_LEFT;
+    if (c & (1u << 14)) keys |= BTN_DOWN;
+    if (c & (1u << 15)) keys |= BTN_RIGHT;
+    return keys;
+#else
     return (~GPIOB->INDR & BTN_PORTB) | (~GPIOC->INDR & BTN_PORTC);
+#endif
 }
 
 #ifndef CH32X035_ESIG_UNIID1

@@ -34,13 +34,14 @@ const (
 	// that name; later boards are "CGR<n>" (spec/chgame.md, "Devices and
 	// revisions"). Never reused or reassigned.
 	chgTargetRev0 = 0x35335843 // "CX35": CHGame Rev0 (CH32X035G8U6)
+	chgTargetWeActF8U6 = 0x36384657 // "WF86": WeAct CH32X035F8U6
 	chgTargetRev1 = 0x31524743 // "CGR1": reserved for CHGame Rev1, not yet defined
 )
 
 // The boards this tool uploads and packs for, and the names assigned to
 // boards not defined yet (refused, by name).
 var (
-	chgDevices  = map[string]uint32{"rev0": chgTargetRev0}
+	chgDevices  = map[string]uint32{"rev0": chgTargetRev0, "weact-f8u6": chgTargetWeActF8U6}
 	chgReserved = map[string]uint32{"rev1": chgTargetRev1}
 )
 
@@ -75,7 +76,7 @@ func targetOf(device string) (uint32, error) {
 	if _, ok := chgReserved[device]; ok {
 		return 0, fmt.Errorf("%s is reserved for a board that is not defined yet", device)
 	}
-	return 0, fmt.Errorf("unknown device %q (known: rev0)", device)
+	return 0, fmt.Errorf("unknown device %q (known: rev0, weact-f8u6)", device)
 }
 
 func chgText(dst []byte, s, what string) error {

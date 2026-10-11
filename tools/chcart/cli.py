@@ -1,3 +1,4 @@
+# Modified 2026-10-11: WeAct F8U6 hardware variant; see docs/weact-f8u6.md.
 """`chgame cart ...` and `chgame export`: .chgame files from the command line.
 
     chgame export [--no-build] [--out F]          in a sketch folder: build/<Name>.chgame
@@ -122,7 +123,7 @@ def _apply_cart_args(cart, a):
 def cmd_new(a):
     games = []
     for item in a.items:
-        games = sources.merge(games, sources.load_item(item, build=not a.no_build))
+        games = sources.merge(games, sources.load_item(item, build=not a.no_build, device=a.device))
     first = next((zipio.load(i) for i in a.items if str(i).lower().endswith(".chgame")), None)
     cart = model.Cart(title=a.title or (first.title if first else games[0].title if len(games) == 1 else "CART"),
                       games=games)
@@ -141,7 +142,7 @@ def recipe_sketches(recipe_path):
     return [e["sketch"] for e in r.get("games", []) if "sketch" in e]
 
 
-def build_recipe(recipe_path, build=True, platform_dir=None, binary=None, only=None):
+def build_recipe(recipe_path, build=True, platform_dir=None, binary=None, only=None, device="rev0"):
     """A Cart from a recipe file. `binary(sketch_dir)` may supply each release
     .bin instead of building (tools/release/acceptance.py); `platform_dir`
     finds the sketches in an installed board package instead of here; `only`
@@ -157,9 +158,9 @@ def build_recipe(recipe_path, build=True, platform_dir=None, binary=None, only=N
             continue
         d = paths.sketch(name) if platform_dir is None else _in_platform(name, platform_dir)
         if binary is not None:
-            g = sources.from_sketch(d, pathlib.Path(binary(d)).read_bytes())
+            g = sources.from_sketch(d, pathlib.Path(binary(d)).read_bytes(), device)
         else:
-            g = sources.load_item(d, build=build)[0]
+            g = sources.load_item(d, build=build, device=device)[0]
         for k, v in e.items():
             if k not in GAME_SET:
                 raise CartError([model.Issue("bad-field", f"{recipe_path}: {name}.{k}", "not a game key a recipe sets")])
@@ -224,7 +225,7 @@ def _in_platform(name, platform_dir):
 
 
 def cmd_build(a):
-    cart = build_recipe(a.recipe, build=not a.no_build)
+    cart = build_recipe(a.recipe, build=not a.no_build, device=a.device)
     out = a.out or str(pathlib.Path(a.recipe).with_suffix(".chgame").name)
     _save(cart, out)
     return 0
@@ -234,7 +235,7 @@ def cmd_add(a):
     cart = _load(a.pkg)
     new = []
     for item in a.items:
-        new += sources.load_item(item, build=not a.no_build)
+        new += sources.load_item(item, build=not a.no_build, device=a.device)
     for g in new:
         if a.folder is not None:
             g.folder = a.folder
@@ -392,10 +393,11 @@ def cmd_backup(a):
 
 
 def cmd_export(a, sketch):
-    g = sources.load_item(sketch, build=not a.no_build)[0]
+    g = sources.load_item(sketch, build=not a.no_build, device=a.device)[0]
     cart = model.Cart(title=g.title, games=[g], version=g.version, author=g.author, license=g.license,
                       url=g.url, sourceUrl=g.sourceUrl)
-    out = pathlib.Path(a.out) if a.out else sketch / "build" / f"{sketch.name}.chgame"
+    base = sketch / "build" if a.device == "rev0" else sketch / "build" / a.device
+    out = pathlib.Path(a.out) if a.out else base / f"{sketch.name}.chgame"
     out.parent.mkdir(parents=True, exist_ok=True)
     _save(cart, out)
     return 0
@@ -421,7 +423,8 @@ def parser():
         else:
             p.add_argument("recipe")
             p.add_argument("out", nargs="?")
-        p.add_argument("--no-build", action="store_true", help="sketches: take build/release as it is")
+        p.add_argument("--no-build", action="store_true", help="sketches: use this device's existing release build")
+        p.add_argument("--device", choices=list(model.DEVICES), default="rev0")
         for k in CART_SET:
             p.add_argument(f"--{k}")
     p = sub.add_parser("add", help="add games")
@@ -429,6 +432,7 @@ def parser():
     p.add_argument("items", nargs="+")
     p.add_argument("--folder")
     p.add_argument("--at", type=int, help="position (0 = first)")
+    p.add_argument("--device", choices=list(model.DEVICES), default="rev0")
     p.add_argument("--no-build", action="store_true")
     p = sub.add_parser("remove", help="remove games")
     p.add_argument("pkg")
@@ -606,7 +610,8 @@ def picture_main(argv):
 
 def export_main(argv, sketch):
     ap = argparse.ArgumentParser(prog="chgame export", description="the sketch as a .chgame (build/<Name>.chgame)")
-    ap.add_argument("--no-build", action="store_true", help="take build/release as it is")
+    ap.add_argument("--no-build", action="store_true", help="use this device's existing release build")
+    ap.add_argument("--device", choices=list(model.DEVICES), default="rev0")
     ap.add_argument("--out")
     a = ap.parse_args(argv)
     try:

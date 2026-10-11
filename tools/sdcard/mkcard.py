@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Modified 2026-10-11: WeAct F8U6 hardware variant; see docs/weact-f8u6.md.
 """The repository's cart and its SD card.
 
     chgame card                          build every program; write the cart and the card
@@ -28,7 +29,7 @@ import sys
 REPO = pathlib.Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(REPO / "tools"))
 import chgpack  # noqa: E402
-from chcart import cli, runtime, zipio  # noqa: E402
+from chcart import cli, runtime, zipio, model  # noqa: E402
 
 RECIPE = pathlib.Path(__file__).with_name("casino.json")
 PLATFORM = REPO / "platform" / "board" / "arduino" / "CHGame"
@@ -47,22 +48,22 @@ def folder(name: str, platform_dir: pathlib.Path = PLATFORM) -> pathlib.Path:
     return cli._in_platform(name, platform_dir)
 
 
-def make_cart(only=None, binary=None, platform_dir: pathlib.Path = PLATFORM, version: str = ""):
+def make_cart(only=None, binary=None, platform_dir: pathlib.Path = PLATFORM, version: str = "", device="rev0"):
     """The casino cart. binary(sketch folder) gives each release .bin; None
     builds them (tools/device.py)."""
     cart = cli.build_recipe(RECIPE, build=binary is None, binary=binary, only=only,
-                            platform_dir=None if platform_dir == PLATFORM else platform_dir)
+                            platform_dir=None if platform_dir == PLATFORM else platform_dir, device=device)
     cart.version = version or cart.version
     return cart
 
 
-def make_card(cart, out: pathlib.Path, image: str | None = None) -> dict:
+def make_card(cart, out: pathlib.Path, image: str | None = None, device="rev0") -> dict:
     """The cart's card into out/ (replacing it), a table of what is on it, and
     a FAT32 image if asked. Returns {card path: bytes}."""
-    files = runtime.prepare(cart)
+    files = runtime.prepare(cart, device)
     runtime.write_folder(files, out)
     print(f"{'game':16s} {'file':24s} {'image':>7s}  crc32     title")
-    for g, path in zip_games(cart, files):
+    for g, path in zip_games(cart, files, device):
         i = chgpack.parse(files[path])
         print(f"{g.id:16s} {path:24s} {i['payload_bytes']:7d}  {i['payload_crc32']:08x}  {g.title}")
     print(f"\n{len(cart.games)} games, {len(files)} files in {out}")
@@ -72,29 +73,34 @@ def make_card(cart, out: pathlib.Path, image: str | None = None) -> dict:
     return files
 
 
-def zip_games(cart, files):
+def zip_games(cart, files, device="rev0"):
     """(game, its CHG file's card path), matched by the CHG's payload."""
     by_payload = {}
     for p, data in files.items():
         if p.endswith(".CHG"):
             by_payload.setdefault(data[512:512 + chgpack.parse(data)["payload_bytes"]], p)   # (a picture may follow)
-    return [(g, by_payload[chgpack.pad_image(g.binaries["rev0"])]) for g in cart.games]
+    return [(g, by_payload[chgpack.pad_image(g.binaries[device])]) for g in cart.games]
 
 
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--out", default=str(REPO / "out" / "sdcard"))
-    ap.add_argument("--cart", default=str(CART), help="where the .chgame goes")
+    ap.add_argument("--out", help="default: out/sdcard, or out/sdcard-<device>")
+    ap.add_argument("--device", choices=list(model.DEVICES), default="rev0")
+    ap.add_argument("--cart", help="where the .chgame goes (default includes the device for WeAct)")
     ap.add_argument("--image", help="also write a FAT32 card image here")
     ap.add_argument("--no-build", action="store_true", help="use the existing build/release/*.ino.bin")
     ap.add_argument("--only", nargs="*", help="sketch names to include (default: all)")
     a = ap.parse_args(argv)
-    binary = (lambda d: d / "build" / "release" / f"{d.name}.ino.bin") if a.no_build else None
-    cart = make_cart(a.only, binary)
+    import device as dev
+    suffix = "" if a.device == "rev0" else "-" + a.device
+    a.out = a.out or str(REPO / "out" / ("sdcard" + suffix))
+    a.cart = a.cart or str(CART.with_name(CART.stem + suffix + CART.suffix))
+    binary = (lambda d: dev.build_path(d, target=a.device) / f"{d.name}.ino.bin") if a.no_build else None
+    cart = make_cart(a.only, binary, device=a.device)
     pathlib.Path(a.cart).parent.mkdir(parents=True, exist_ok=True)
     data = zipio.write(cart, a.cart)
     print(f"{a.cart}: {len(cart.games)} games, {len(data)} B")
-    make_card(cart, pathlib.Path(a.out), a.image)
+    make_card(cart, pathlib.Path(a.out), a.image, a.device)
     return 0
 
 

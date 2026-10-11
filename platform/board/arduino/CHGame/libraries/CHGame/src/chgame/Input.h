@@ -1,3 +1,4 @@
+/* Modified 2026-10-11: WeAct F8U6 hardware variant; see docs/weact-f8u6.md. */
 /// @file Input.h
 /// @brief Buttons and frame pacing: the Arduboy-flavoured front of the CHGame board.
 ///
@@ -32,13 +33,13 @@
 /// @{
 
 #define A_BUTTON      (1u << 0)     ///< The A button (PB1).
-#define B_BUTTON      (1u << 1)     ///< The B button (PB6).
-#define UP_BUTTON     (1u << 2)     ///< D-pad up (PB4).
+#define B_BUTTON      (1u << 1)     ///< The B button (Rev0 PB6; WeAct PA1).
+#define UP_BUTTON     (1u << 2)     ///< D-pad up (Rev0 PB4; WeAct PA0).
 #define DOWN_BUTTON   (1u << 3)     ///< D-pad down (PC14).
 #define LEFT_BUTTON   (1u << 4)     ///< D-pad left (PB3).
 #define RIGHT_BUTTON  (1u << 5)     ///< D-pad right (PC15).
-#define START_BUTTON  (1u << 6)     ///< START (PB8). Held 3 s, it leaves for the menu (CHGame::startExits).
-#define SELECT_BUTTON (1u << 7)     ///< SELECT (PB7).
+#define START_BUTTON  (1u << 6)     ///< START (Rev0 PB8; WeAct PA2). Held 3 s, it leaves for the menu (CHGame::startExits).
+#define SELECT_BUTTON (1u << 7)     ///< SELECT (Rev0 PB7; WeAct PA3).
 
 /// @brief Read the buttons straight from the hardware.
 /// @return A mask of the buttons held right now (pressed = 1), `A_BUTTON` ...

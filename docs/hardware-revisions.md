@@ -1,3 +1,4 @@
+<!-- Modified 2026-10-11: WeAct F8U6 hardware variant; see docs/weact-f8u6.md. -->
 # Hardware revisions
 
 What to do when the CHGame handheld gets a new board: whether it needs a
@@ -12,6 +13,7 @@ this page is the working guide.
 | Device | Board | Target id | State |
 |---|---|---|---|
 | `rev0` | CHGame Rev0, CH32X035G8U6 | `CX35` (`0x35335843`) | released; named after its MCU before boards had ids, kept for good |
+| `weact-f8u6` | WeAct CH32X035F8U6 | `WF86` (`0x36384657`) | supported fork variant; [wiring and use](weact-f8u6.md) |
 | `rev1` | CHGame Rev1 | `CGR1` (`0x31524743`) | **reserved** (2026-10-07): pins to change for compatibility; nothing else settled |
 | `rev2` ... `rev9` | | `CGR2` ... `CGR9` | free, in that order |
 | `rev10` ... `rev99` | | `CG10` ... `CG99` | free |
@@ -82,15 +84,15 @@ exists:
 |---|---|
 | **A `.chgame` cart** | Each binary names its device; a reader picks by name and never falls back to another board's. A reader made before a board exists warns (`unknown-device`), ignores that binary, keeps it when it rewrites the cart, and uses the rest. |
 | **The SD menu** | A CHG file carries its board's target id. A bootloader installs only its own board's: another board's files show greyed under their 8.3 names, and starting one shows ERROR 5, with nothing erased. A card is prepared for one board (`chgame cart prepare --device`). |
-| **A sketch over USB** | `chgame-upload flash -device rev0` (and `chgame cart flash` / `deploy`) refuse a board whose `HELLO` names another device. A rev0 bootloader sends no board field, which means rev0. **Arduino's Upload does not pass `-device` yet** (step 4 below). Until then a wrong upload goes through: the game shows nothing, and switching the board on brings up the menu, from which the right build can be uploaded. |
+| **A sketch over USB** | `chgame-upload flash -device rev0` (and `chgame cart flash` / `deploy`) refuse a board whose `HELLO` names another device. A rev0 bootloader sends no board field, which means rev0. Arduino Upload and the CHG post-build hook pass the selected board's `-device`. Upload then refuses a different board; Rev0 remains the default. |
 | **A bootloader over USB** (`selfupdate`, Burn Bootloader with *CHGame USB*) | Refused when the image's board word (offset 0x14; 0 means rev0) names another board than the one running. |
 | **A bootloader through the factory ISP** | **Not checked**: the chip's ROM knows nothing of boards. A rev0 bootloader on a rev1 board leaves it dark (the bootloader drives the wrong pins), and the ISP with the right bootloader brings it back ([recovery](../platform/board/docs/recovery.md)). The IDE's board menu is the only guard. |
 | **The web emulator** | Emulates rev0 and takes `rev0` binaries (spec/README.md, "Board revisions"). |
 
-What is still rev0-only, on purpose, until rev1's pins are known: the
-board package (one board, one variant), the bootloader's pins, the
-libraries' pins, and the build tools' FQBN (`tools/device.py`,
-`chgame card`, `chgame export`).
+In this fork the board package, shared input/audio paths, bootloader and
+repository build/export/card tools support both `rev0` and `weact-f8u6`.
+Rev0 remains the default. The reserved `rev1` is not a supported build target
+until its hardware definition is settled.
 
 ## Adding a board: the checklist
 

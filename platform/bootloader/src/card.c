@@ -91,7 +91,7 @@ static int add_entry(const uint8_t *d, void *ctx)
 static void set_title(game_t *g, const uint8_t *s)
 {
     for (uint32_t k = 0, end = 0; k < TITLE_COLS; k++) {
-        char ch = (char)s[k];
+        char ch = end ? 0 : (char)s[k];
         if (!ch) end = 1;
         if (ch >= 'a' && ch <= 'z') ch -= 32;
         g->title[k] = end ? ' ' : (ch < 32 || ch > '_' ? '?' : ch);

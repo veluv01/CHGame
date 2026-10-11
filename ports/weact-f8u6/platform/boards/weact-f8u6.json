@@ -1,0 +1,21 @@
+{
+  "name": "CHGame on WeAct CH32X035F8U6",
+  "vendor": "WeAct Studio",
+  "url": "https://github.com/WeActStudio/WeActStudio.CH32X035CoreBoard",
+  "frameworks": ["arduino"],
+  "build": {
+    "mcu": "ch32x035f8u6",
+    "f_cpu": "48000000L",
+    "march": "rv32imacxw",
+    "mabi": "ilp32",
+    "core": "chgame",
+    "variant": "CHGame_WeActF8U6",
+    "extra_flags": "-DARDUINO_CHGAME_WEACT_F8U6 -DCH32V_LOCK_DEBUG"
+  },
+  "upload": {
+    "maximum_size": 50944,
+    "maximum_ram_size": 18416,
+    "protocol": "chgame",
+    "protocols": ["chgame"]
+  }
+}

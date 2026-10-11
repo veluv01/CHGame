@@ -160,6 +160,7 @@ def check_constants():
     pairs = [("CHG_MAGIC", chgpack.MAGIC), ("CHG_FORMAT_VERSION", chgpack.FORMAT_VERSION),
              ("CHG_HEADER_BYTES", chgpack.HEADER_BYTES), ("CHG_TARGET_REV0", chgpack.TARGET_REV0),
              ("CHG_TARGET_REV1", chgpack.TARGET_REV1),
+             ("CHG_TARGET_WEACT_F8U6", chgpack.TARGET_WEACT_F8U6),
              ("CHG_LAYOUT_ID", chgpack.LAYOUT_ID), ("CHG_OFF_IMAGE", chgpack.IMAGE_OFF),
              ("CHG_OFF_RECORD", chgpack.RECORD_OFF)]
     bad = [n for n, v in pairs if f[n] != v]
@@ -326,6 +327,8 @@ def main():
         # As build.sh builds a board after rev0 (CHBOOT_BOARD_TARGET): rev1's id
         suites.append(("core_rev1", "test_core.c", ["-DCHBOOT_MENU=1", "-DCHGAME_ALLOW_SELFUPDATE=1",
                                                     f"-DCHGAME_BOARD_TARGET=0x{chgpack.TARGET_REV1:08X}"], CORE + MENU))
+        suites.append(("core_weact", "test_core.c", ["-DCHBOOT_MENU=1", "-DCHGAME_ALLOW_SELFUPDATE=1", "-DCHBOOT_WEACT_F8U6",
+                                                     f"-DCHGAME_BOARD_TARGET=0x{chgpack.TARGET_WEACT_F8U6:08X}"], CORE + MENU))
     sd_srcs = CORE + MENU if menu_built else CORE + ["sd.c", "fat.c", "chg.c"]
     sd_defs = ["-DCHBOOT_MENU=" + ("1" if menu_built else "0")]
     for name, main_c, defs, srcs in suites:

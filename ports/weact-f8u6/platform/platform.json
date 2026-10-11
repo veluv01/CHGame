@@ -1,0 +1,17 @@
+{
+  "name": "chgame-weact",
+  "title": "CHGame WeAct CH32X035F8U6",
+  "description": "CHGame's own Arduino core, relocated applications and WeAct bootloader",
+  "version": "1.0.0",
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/bateske/CHGame",
+  "engines": {"platformio": ">=6.1.18,<7"},
+  "frameworks": {"arduino": {"script": "builder/frameworks/arduino.py"}},
+  "packages": {
+    "toolchain-riscv": {
+      "type": "toolchain",
+      "optional": false,
+      "version": "https://github.com/Community-PIO-CH32V/toolchain-riscv-linux.git#e8e7ba93c9c1ea30366d98f28318d4ad09b369e2"
+    }
+  }
+}

@@ -10,6 +10,14 @@ file as the GitHub release notes.
 
 ### Added
 
+- **WeAct CH32X035F8U6 variant** in this fork: a separate board/pin map,
+  WF86 package identity, silent audio/status LED behavior and retained SDI
+  pins. Rev0 defaults and the reserved Rev1 identity are preserved.
+- **PlatformIO project** at the repository root, with shared game/app,
+  bringup, debug and bootloader environments, pinned WCH toolchains,
+  save-aware memory checks and CHGame USB uploads. The F8U6 guide documents
+  wiring, development, initial provisioning and upstream maintenance.
+
 - **An API reference**, <https://bateske.github.io/CHGame/>: every public
   function, class and constant of CHGame, CHGfx, CHSd, SPI, Wire and EEPROM,
   documented in their headers with Doxygen.

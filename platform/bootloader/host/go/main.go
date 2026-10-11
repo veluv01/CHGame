@@ -21,7 +21,7 @@ import (
 	"time"
 )
 
-var version = "0.2.0"
+var version = "0.2.1-weact.1"
 
 type opts struct {
 	port    string

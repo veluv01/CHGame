@@ -1,3 +1,4 @@
+/* Modified 2026-10-11: WeAct F8U6 hardware variant; see docs/weact-f8u6.md. */
 // The piezo sequencer, from CHBlackjack's: the CHGameSound library does far
 // more (four-voice synthesis, MOD playback) than these games need and costs
 // ~6.5 KB of flash on a 50 KB part. This keeps two of its data formats -
@@ -19,6 +20,27 @@ void setOn(bool on) { simOn = on; }
 bool on() { return simOn; }
 void sfx(uint8_t id) { if (simOn) simLast = id; }
 void sfx(uint8_t id, uint8_t) { sfx(id); }
+void blip(uint16_t, uint16_t, bool) {}
+void note(uint16_t, uint16_t, uint8_t) {}
+bool playing() { return false; }
+void setMusic(uint8_t) {}
+void music(const uint8_t *, bool) {}
+void melody(const Melody &, bool) {}
+void stopMusic() {}
+void loopMusic(bool) {}
+bool musicPlaying() { return false; }
+void update() {}
+void led(Led) {}
+}  // namespace audio
+#elif defined(ARDUINO_CHGAME_WEACT_F8U6)
+// F8U6 has no buzzer or external status LED. Keep every public entry point
+// for existing games, with no timer, GPIO, AFIO or SysTick hook setup.
+namespace audio {
+void begin(const Effect *, uint8_t, bool) {}
+void setOn(bool) {}
+bool on() { return false; }
+void sfx(uint8_t) {}
+void sfx(uint8_t, uint8_t) {}
 void blip(uint16_t, uint16_t, bool) {}
 void note(uint16_t, uint16_t, uint8_t) {}
 bool playing() { return false; }

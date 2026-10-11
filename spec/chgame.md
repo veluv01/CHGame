@@ -1,3 +1,4 @@
+<!-- Modified 2026-10-11: WeAct F8U6 hardware variant; see docs/weact-f8u6.md. -->
 # The .chgame format, version 1
 
 A `.chgame` file is how CHGame games are shared and distributed: one file
@@ -124,6 +125,7 @@ as `objcopy -O binary` does), so readers only ever see one format.
 | `device` | Board | Target id | MCU | Load address | Largest image | Notes |
 |---|---|---|---|---|---|---|
 | `rev0` | CHGame Rev0 (`CHGame:ch32v:rev0`) | `CX35` (`0x35335843`) | CH32X035G8U6 | 0x3000 | 50,944 B | saving needs the image at 50,432 B or less (above that a game's saves switch off: warning `save-pages`); CHG layout `0x003000F7` (chg.md) |
+| `weact-f8u6` | CHGame on WeAct (`CHGame:ch32v:weact-f8u6`) | `WF86` (`0x36384657`) | CH32X035F8U6 | 0x3000 | 50,944 B | fork variant; save-safe 50,432 B; layout `0x003000F7`; no sound or external status LED; see [hardware guide](../docs/weact-f8u6.md) |
 | `rev1` | CHGame Rev1, **reserved**: not defined yet | `CGR1` (`0x31524743`) | | | | the name and id are taken; until this row is filled in, a `rev1` binary is one no reader knows (`unknown-device`) |
 
 - **The image's length**, padded with 0xFF to a multiple of 4, must not

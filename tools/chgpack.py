@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Modified 2026-10-11: WeAct F8U6 hardware variant; see docs/weact-f8u6.md.
 """Make, check and list CHG files, what the SD game menu installs.
 
 A CHG file is a 512-byte header plus the program image exactly as
@@ -40,11 +41,15 @@ APP_MAX_SIZE = 50944        # CHGAME_APP_MAX_SIZE
 # and keeps that name; later boards are "CGR<n>". Never reused or reassigned.
 TARGET_REV0 = 0x35335843    # "CX35": CHGame Rev0 (CH32X035G8U6)
 TARGET_REV1 = 0x31524743    # "CGR1": reserved for CHGame Rev1, not yet defined
+TARGET_WEACT_F8U6 = 0x36384657  # "WF86": WeAct CH32X035F8U6
 TARGET_ID = TARGET_REV0     # the board a package is for when none is named
 # The boards these tools make and read packages for: target id -> (device,
 # layout id, largest payload). A board joins when spec/chgame.md's device
 # table defines it, with chcart.model.DEVICES (chcart's tests check they agree).
-BOARDS = {TARGET_REV0: ("rev0", LAYOUT_ID, APP_MAX_SIZE)}
+BOARDS = {
+    TARGET_REV0: ("rev0", LAYOUT_ID, APP_MAX_SIZE),
+    TARGET_WEACT_F8U6: ("weact-f8u6", LAYOUT_ID, APP_MAX_SIZE),
+}
 # Ids assigned to boards that are not defined yet: refused, but by name.
 RESERVED = {TARGET_REV1: "rev1"}
 BOOT_SIG = 0x4C424843       # "CHBL" at payload offset 8 marks a bootloader image

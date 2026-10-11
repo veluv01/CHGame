@@ -1,0 +1,3 @@
+.pio/
+src/*.ino.cpp
+__pycache__/
