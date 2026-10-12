@@ -2,9 +2,9 @@ name: Stonebound
 on:
   push:
     branches: [codex/stonebound-weact]
-    paths: ["games/Stonebound/**", ".github/workflows/stonebound.yml"]
+    paths: ["games/Stonebound/**", "!games/Stonebound/docs/**", "!games/Stonebound/downloads/**", "!games/Stonebound/*.md", ".github/workflows/stonebound.yml"]
   pull_request:
-    paths: ["games/Stonebound/**", ".github/workflows/stonebound.yml"]
+    paths: ["games/Stonebound/**", "!games/Stonebound/docs/**", "!games/Stonebound/downloads/**", "!games/Stonebound/*.md", ".github/workflows/stonebound.yml"]
 permissions:
   contents: read
 concurrency:

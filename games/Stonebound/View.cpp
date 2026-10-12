@@ -50,7 +50,7 @@ static void tile(int x,int y,int xx,int yy) {
   int l=lootAt(xx,yy);
   if(l>=0) {
     uint8_t k=world.loot[l].kind;
-    if(k==GOLD) {gfx_fillRect(x+2,y+3,4,3,6);gfx_pixel(x+3,y+2,5);}
+    if(k==stone::GOLD) {gfx_fillRect(x+2,y+3,4,3,6);gfx_pixel(x+3,y+2,5);}
     else if(k==POTION||k==TONIC) {
       gfx_fillRect(x+3,y+1,2,2,5);gfx_fillRect(x+2,y+3,4,4,k==POTION?9:12);gfx_pixel(x+3,y+3,5);
     } else if(k==RATION) {gfx_fillRect(x+2,y+2,4,4,7);gfx_hline(x+2,y+2,4,6);}

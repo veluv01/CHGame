@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Package the actual WF86 release and enforce flash/RAM/save-page budgets."""
+import base64
 import hashlib
 import json
 from pathlib import Path
@@ -92,3 +93,8 @@ with zipfile.ZipFile(archive,"w",compression=zipfile.ZIP_DEFLATED,compresslevel=
             z.write(path,path.relative_to(OUT).as_posix())
 print("stonebound PACKAGE "+json.dumps(report,separators=(",",":")))
 print("stonebound release "+str(archive))
+# Relay deterministic deliverables for attachment to the review branch.
+for name,path in [("STONE.CHG",dest/"STONE.CHG"),("Stonebound-WeAct.bin",OUT/"Stonebound-WeAct.bin"),
+                  ("cart.png",GAME/"docs"/"cart.png"),("gameplay.gif",GAME/"docs"/"gameplay.gif")]:
+    print("STONEBOUND_FILE "+name+" "+base64.b64encode(path.read_bytes()).decode())
+
