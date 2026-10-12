@@ -5,9 +5,8 @@ Target: WeAct CH32X035F8U6 Core Board V1.0, the existing CHGame WeAct wiring,
 
 ## Run the ready-built game
 
-1. Download the **Stonebound-WeAct-0.1.0** artifact from a successful
-   [Stonebound workflow](https://github.com/veluv01/CHGame/actions/workflows/stonebound.yml).
-2. Extract the artifact, then extract its Stonebound-WeAct-0.1.0.zip.
+1. Download **[Stonebound-WeAct-0.1.0.zip](https://github.com/veluv01/CHGame/raw/refs/heads/codex/stonebound-weact/packages/Stonebound-WeAct-0.1.0.zip)**.
+2. Extract the package.
 3. Copy **sdcard/GAMES/STONE.CHG** to **GAMES/STONE.CHG** on your FAT32 card.
 4. Put the card into the console and select **STONEBOUND**.
 
@@ -21,7 +20,14 @@ no bootloader replacement or factory-provisioning command.
 
 ## Build with PlatformIO
 
-Use Python 3.10+ and the maintained CHGame fork. From its repository root:
+Use Python 3.10+ and the maintained CHGame fork. Get this development branch:
+
+~~~sh
+git clone --branch codex/stonebound-weact https://github.com/veluv01/CHGame.git
+cd CHGame
+~~~
+
+Then, from its repository root:
 
 ~~~sh
 python3 -m venv .venv

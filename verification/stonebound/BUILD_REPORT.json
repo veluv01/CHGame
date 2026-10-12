@@ -1,0 +1,46 @@
+{
+  "game": "Stonebound",
+  "version": "0.1.0",
+  "device": "weact-f8u6",
+  "target": "WF86",
+  "hardware_tested": false,
+  "profiles": {
+    "stonebound": {
+      "flash_bytes": 20476,
+      "flash_budget": 50432,
+      "static_ram_bytes": 12800,
+      "static_ram_budget": 18416,
+      "save_pages": 2,
+      "sha256": "3d4fcc9cb42b2175487c3cf544307773b3813ad2bcbdcfaf4a2f097e13f0bebe"
+    },
+    "stonebound-debug": {
+      "flash_bytes": 30048,
+      "flash_budget": 50432,
+      "static_ram_bytes": 13192,
+      "static_ram_budget": 18416,
+      "save_pages": 2,
+      "sha256": "8fc051485d1136804001ed32ea22fcfdbc9b86273dfec5e531064e52685688a1"
+    }
+  },
+  "chg_sha256": "b8bd12c299701cc975ce6b6bcce39e1cf2572d3b7c61da874d32693d7c173b43",
+  "package": {
+    "device": "weact-f8u6",
+    "target": 909657687,
+    "title": "STONEBOUND",
+    "author": "",
+    "version": "0.1.0",
+    "payload_bytes": 20476,
+    "payload_crc32": 994349795,
+    "app_version": 256,
+    "file_bytes": 29696
+  },
+  "firmware_source_commit": "12aa76a26bf850400577bc1fb91aac73dbcd6597",
+  "chgame_base_commit": "c008a001a51f1eaa5087634193a04bbd4f0657c0",
+  "verification_run": "https://github.com/veluv01/CHGame/actions/runs/38251669229",
+  "native_checks": 949325,
+  "generated_floor_cases": 1800,
+  "randomized_attempted_actions": 53566,
+  "simulator_checks": 24,
+  "game_state_bytes": 168,
+  "world_bytes": 734
+}

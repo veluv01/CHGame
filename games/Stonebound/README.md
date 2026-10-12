@@ -18,11 +18,33 @@ the full DCSS engine and does not require a DCSS installation or data files.
 
 **[Install on your WeAct console](INSTALL.md)** ·
 **[Build and test](DEVELOPING.md)** ·
-**[Get the verified download](https://github.com/veluv01/CHGame/actions/workflows/stonebound.yml)**
+**[Download the verified package](https://github.com/veluv01/CHGame/raw/refs/heads/codex/stonebound-weact/packages/Stonebound-WeAct-0.1.0.zip)**
 
-The workflow's **Stonebound-WeAct-0.1.0** artifact contains the ready-to-copy
-**GAMES/STONE.CHG**, raw firmware, source, screenshots and measured memory report.
-Artifacts expire after 30 days; the workflow can reproduce the package.
+The package contains the ready-to-copy **GAMES/STONE.CHG**, raw firmware,
+source, screenshots and measured memory report. For just the game, download
+**[STONE.CHG](https://github.com/veluv01/CHGame/raw/refs/heads/codex/stonebound-weact/sdcard/stonebound/GAMES/STONE.CHG)**
+and copy it to **GAMES/STONE.CHG** on your card.
+
+The [successful verification run](https://github.com/veluv01/CHGame/actions/runs/38251669229)
+built both firmware profiles, passed the native and simulator checks, and
+produced these binaries. Read the [measured build report](https://github.com/veluv01/CHGame/blob/codex/stonebound-weact/verification/stonebound/BUILD_REPORT.md)
+for budgets, hashes and validation limits.
+
+## Simulator captures
+
+![Stonebound input demonstration](docs/gameplay.gif)
+
+| Explore the dungeon | Choose a spell |
+|---|---|
+| ![Dungeon exploration](docs/exploration.png) | ![Spellbook](docs/spells.png) |
+
+| The Stone Warden | Victory |
+|---|---|
+| ![Warden and its health bar](docs/warden.png) | ![Victory screen](docs/victory.png) |
+
+These images come from the actual sketch running in CHGame's simulator.
+The GIF uses button inputs; boss, victory and defeat previews use explicit
+render fixtures. They are not physical-device footage.
 
 ## What is included
 
