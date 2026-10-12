@@ -34,8 +34,33 @@ static void beginJourney() {
   newGame(runSeed(),hero);screen=view::PLAY;savePending=true;
 }
 #if CHGAME_DEBUG
-static bool debugHook(char command,const char *) {
+static bool debugHook(char command,const char *args) {
 #ifdef CHSIM
+  if(command=='f') {
+    // Simulator-only render fixtures. No such command is built for hardware.
+    while(*args==' ')args++;
+    uint8_t fixture=uint8_t(*args-'0');
+    if(fixture<1||fixture>3)return false;
+    newGame(20261012,hero);screen=view::PLAY;notice=nullptr;
+    for(int n=1;n<LAST_FLOOR;n++){game.x=world.exitX;game.y=world.exitY;waitOrDescend();}
+    if(fixture==1) {
+      for(int i=0;i<game.enemyCount;i++)if(game.enemies[i].kind==WARDEN) {
+        const int8_t dx[]={0,0,-1,1},dy[]={-1,1,0,0};
+        for(int k=0;k<4;k++) {
+          int x=game.enemies[i].x+dx[k],y=game.enemies[i].y+dy[k];
+          if(passable(x,y)&&enemyAt(x,y)<0){game.x=uint8_t(x);game.y=uint8_t(y);break;}
+        }
+      }
+      see();
+    } else if(fixture==2) {
+      for(int i=0;i<game.enemyCount;i++)if(game.enemies[i].kind==WARDEN)game.enemies[i].hp=0;
+      game.x=world.exitX;game.y=world.exitY;waitOrDescend();screen=view::END;
+    } else {
+      game.x=world.startX;game.y=world.startY;game.hp=1;game.food=0;game.turns=7;
+      waitOrDescend();screen=view::END;
+    }
+    return true;
+  }
   if(command=='v') {
     // Reset volatile game state, then reread the simulator's persistent pages.
     gfx_wait(); game=State{}; world=World{}; saved=State{};
@@ -46,9 +71,10 @@ static bool debugHook(char command,const char *) {
 #endif
   if(command!='u')return false;
   char line[160];
-  snprintf(line,sizeof line,"STATE screen=%u mode=%u floor=%u hp=%u mp=%u turns=%u x=%u y=%u save=%u hero=%u\n",
+  snprintf(line,sizeof line,"STATE screen=%u mode=%u floor=%u hp=%u mp=%u turns=%u x=%u y=%u save=%u hero=%u time=%u held=%u\n",
     unsigned(screen),unsigned(game.mode),unsigned(game.floor),unsigned(game.hp),unsigned(game.mp),
-    unsigned(game.turns),unsigned(game.x),unsigned(game.y),unsigned(hasSave),unsigned(hero));
+    unsigned(game.turns),unsigned(game.x),unsigned(game.y),unsigned(hasSave),unsigned(hero),unsigned(millis()),
+    unsigned(quitHeld?uint32_t(millis()-quitStart):0));
   dbg::print(line);return true;
 }
 #endif

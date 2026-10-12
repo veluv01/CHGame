@@ -62,7 +62,9 @@ The linker reserves an additional 2 KB stack and the bootloader's retained block
 
 The release has no debug commands. The debug profile supports the shared
 CHGame protocol and **u**, which reports the game state. In the simulator,
-**v** clears volatile game state and rereads the save pages for regression tests.
+**v** clears volatile game state and rereads the save pages for regression tests. The simulator-only **f 1/2/3** commands set up explicit
+boss, victory and defeat render fixtures. These are used for screen QA; the
+native rules tests independently exercise the final-exit and death mechanics.
 
 ## Maintaining the game
 

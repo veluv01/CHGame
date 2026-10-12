@@ -90,17 +90,32 @@ tap("A")
 after = state()
 for key in ["floor","hp","mp","turns","x","y"]:
     check(after[key] == before[key], "continue restores " + key)
+# Capture end-game screens from explicit simulator-only fixtures.
+for fixture,name,expected in [(1,"warden",2),(2,"victory",7),(3,"defeat",7)]:
+    d.cmd("f "+str(fixture));d.frames(2);capture(name)
+    check(state()["screen"]==expected,"renders "+name+" fixture")
+d.cmd("v");d.frames(2);tap("A")
+
+def hold_until(milliseconds):
+    # Lockstep draws frames without waiting for the 30 Hz pacer.
+    # Use the game's measured elapsed milliseconds instead of frame counts.
+    for _ in range(1000):
+        if state()["held"]>=milliseconds:
+            return
+        d.frames(1)
+    raise AssertionError("simulator clock did not advance")
+
 # Three seconds must remain below this game's five-second quit threshold.
-d.buttons(mask_of("START")); d.frames(90)
+d.buttons(mask_of("START"));d.frames(1);hold_until(3000)
 check(state()["screen"] == 2, "holding START for three seconds keeps the game running")
 d.buttons(0); d.frames(2)
 check(state()["screen"] == 5, "releasing START cancels quit and opens pause")
 tap("START")
 check(state()["screen"] == 2, "short START resumes")
-d.buttons(mask_of("START")); d.frames(148)
+d.buttons(mask_of("START"));d.frames(1);hold_until(4900)
 check(state()["screen"] == 2, "still running immediately before five seconds")
 try:
-    d.frames(6)
+    d.frames(12)
 except EOFError:
     pass
 else:
