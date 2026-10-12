@@ -1,0 +1,47 @@
+name: Stonebound
+on:
+  push:
+    branches: [codex/stonebound-weact]
+    paths: ["games/Stonebound/**", ".github/workflows/stonebound.yml"]
+  pull_request:
+    paths: ["games/Stonebound/**", ".github/workflows/stonebound.yml"]
+permissions:
+  contents: read
+concurrency:
+  group: stonebound-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  firmware-and-gameplay:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Install tools
+        run: |
+          python3 -m venv .venv
+          .venv/bin/python -m pip install -r ports/weact-f8u6/requirements.txt "pillow>=10,<12" "pyelftools>=0.30,<1"
+      - name: Native rules and generation with sanitizers
+        run: |
+          mkdir -p games/Stonebound/out
+          g++ -std=c++14 -O1 -g -fsanitize=address,undefined -fno-omit-frame-pointer games/Stonebound/Game.cpp games/Stonebound/tools/tests/test_game.cpp -o games/Stonebound/out/rules
+          games/Stonebound/out/rules
+      - name: Build release and debug firmware
+        run: .venv/bin/pio run -d games/Stonebound -e stonebound -e stonebound-debug
+      - name: Simulator controls, saves and quit timing
+        env:
+          CHSIM_CXX: g++
+          CHSIM_FLAGS: "-include chrono"
+        run: .venv/bin/python games/Stonebound/tools/sim_check.py
+      - name: Verify and package the board download
+        run: .venv/bin/python games/Stonebound/tools/package.py
+      - name: Upload download and screenshots
+        uses: actions/upload-artifact@v4
+        with:
+          name: Stonebound-WeAct-0.1.0
+          path: |
+            games/Stonebound/out/Stonebound-WeAct-0.1.0.zip
+            games/Stonebound/out/release/BUILD_REPORT.*
+            games/Stonebound/docs/*.png
+            games/Stonebound/docs/*.gif
+          retention-days: 30
+          if-no-files-found: error

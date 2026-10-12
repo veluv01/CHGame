@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="260" viewBox="0 0 960 260" role="img" aria-label="Stonebound: six floors, one ancient rune">
+<rect width="960" height="260" rx="16" fill="#101421"/>
+<path d="M0 52H960M0 104H960M0 156H960M0 208H960M0 260H960M80 0V52M240 0V52M400 0V52M560 0V52M720 0V52M880 0V52M0 52V104M160 52V104M320 52V104M480 52V104M640 52V104M800 52V104M80 104V156M240 104V156M400 104V156M560 104V156M720 104V156M880 104V156M160 156V208M320 156V208M480 156V208M640 156V208M800 156V208" stroke="#25333f" stroke-width="3"/>
+<rect x="34" y="30" width="892" height="200" rx="12" fill="#101421" opacity=".91"/>
+<path d="M121 67L157 103L121 139L85 103Z" fill="#a582d1"/>
+<path d="M121 83L141 103L121 123L101 103Z" fill="#d1bced"/>
+<path d="M102 161H142M94 177H150M85 193H160" stroke="#e0af55" stroke-width="8"/>
+<text x="200" y="113" fill="#e0af55" font-size="64" font-family="monospace" font-weight="bold" letter-spacing="4">STONEBOUND</text>
+<text x="205" y="158" fill="#eee8d5" font-size="22" font-family="monospace">SIX FLOORS. ONE ANCIENT RUNE.</text>
+<text x="205" y="193" fill="#a4b0b8" font-size="17" font-family="monospace">Procedural dungeons · Turn-based combat · CHGame / WeAct F8U6</text>
+</svg>

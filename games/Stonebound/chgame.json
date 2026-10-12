@@ -1,0 +1,7 @@
+{
+  "id": "stonebound",
+  "title": "Stonebound",
+  "version": "0.1.0",
+  "description": "Six procedural dungeon floors, turn-based combat, spells, loot and the Stone Warden.",
+  "entry": "Stonebound.ino"
+}
